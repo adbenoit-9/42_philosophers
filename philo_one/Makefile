@@ -6,19 +6,20 @@
 #    By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/06 17:11:11 by adbenoit          #+#    #+#              #
-#    Updated: 2021/04/06 17:15:39 by adbenoit         ###   ########.fr        #
+#    Updated: 2021/04/07 18:06:12 by adbenoit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= philo_one
+NAME			=	philo_one
 
-INC				= 
+INC				=	inc/
 
 HEADER			=	$(INC)philo_one.h
 
-SRC_PATH		=	
+SRC_PATH		=	src/
 
-SRC				=	main.c
+SRC				=	main.c		init_data.c		handle_philo.c \
+					utils.c
 
 CC				=	gcc
 CFLAGS			=	-Wall -Wextra -Werror -fsanitize=address
@@ -31,7 +32,7 @@ OBJ				=	$(addprefix $(OBJ_PATH),$(OBJ_NAME))
 
 $(NAME) : $(OBJ)
 	@printf "\n"
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
+	@$(CC) $(CFLAGS) -lpthread -o $(NAME) $(OBJ)
 	@echo "Compilation of \033[33;1m$(NAME)\033[0;1m: [\033[1;32mOK\033[0;1m]\033[0m"
 
 all: $(NAME) 
