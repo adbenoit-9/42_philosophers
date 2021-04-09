@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:11:16 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/07 17:41:46 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/09 13:50:06 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int	main(int ac, char **av)
 		printf("Arguments error.\n");
 		return (-1);
 	}
-
+	start_philo(data);
 	return (0);
 }

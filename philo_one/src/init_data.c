@@ -15,24 +15,20 @@
 t_philo				*init_philo(int n)
 {
 	t_philo	*philo;
-	t_philo	*tmp;
 	int		i;
 
 	if (n == 0)
 		return (NULL);
-	philo = new_philo(0);
+	philo = (t_philo *)malloc(sizeof(t_philo) * n);
 	if (!philo)
 		return (NULL);
-	tmp = philo->next;
 	i = 0;
 	while (i < n)
 	{
-		tmp = new_philo(i);
-		if (!tmp)
-		{
-			clear_philo(philo);
-			return (NULL);
-		}
+		philo[i].i = i + 1;
+		philo[i].dead = 0;
+		philo[i].n_eat = 0;
+		philo[i].eat = 0;
 		++i;
 	}
 	return (philo);
@@ -66,5 +62,12 @@ int 			init_data(char **av, t_data *data)
 	data->philo = init_philo(data->n);
 	if (!data->philo)
 		return (-1);
+	data->fork = malloc(sizeof(pthread_mutex_t) * data->n);
+	if (!data->fork)
+	{
+		free(data->philo);
+		return (-1);
+	}
+	data->n_dead = 0;
 	return (0);
 }
