@@ -26,9 +26,8 @@ t_philo				*init_philo(int n)
 	while (i < n)
 	{
 		philo[i].i = i + 1;
-		philo[i].dead = 0;
+		philo[i].is_dead = 0;
 		philo[i].n_eat = 0;
-		philo[i].eat = 0;
 		++i;
 	}
 	return (philo);
@@ -42,7 +41,6 @@ int				init_mutex(void)
 	data.fork = malloc(sizeof(pthread_mutex_t) * data.n);
 	if (!data.fork)
 		return (-1);
-	data.n_dead = 0;
 	pthread_mutex_init(&data.mutex, NULL);
 	i = 0;
 	while (i < data.n)
