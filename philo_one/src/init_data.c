@@ -35,39 +35,52 @@ t_philo				*init_philo(int n)
 	
 }
 
-int 			init_data(char **av, t_data *data)
+int				init_mutex(void)
+{
+	int	i;
+
+	data.fork = malloc(sizeof(pthread_mutex_t) * data.n);
+	if (!data.fork)
+		return (-1);
+	data.n_dead = 0;
+	pthread_mutex_init(&data.mutex, NULL);
+	i = 0;
+	while (i < data.n)
+	{
+		pthread_mutex_init(&data.fork[i], NULL);
+		pthread_mutex_init(&data.philo[i].mutex, NULL);
+		++i;
+	}
+	return (0);
+}
+
+int 			init_data(char **av)
 {
 	int i;
 
-	if (!data)
-		return (-1);
 	if (ft_isnumber(av[1]) == 0)
 		return (-1);
-	data->n = ft_atoli(av[1]);
-	data->n_eat = -1;
+	data.n = ft_atoli(av[1]);
+	data.n_eat = -1;
 	i = 0;
 	while (i < 3)
 	{
 		if (ft_isnumber(av[i + 2]) == 0)
 			return (-1);
-		data->time[i] = ft_atoli(av[i + 2]);
+		data.time[i] = ft_atoli(av[i + 2]);
 		++i;
 	}
 	if (av[5])
 	{
 		if (ft_isnumber(av[5]) == 0)
 			return (-1);
-		data->n_eat = ft_atoli(av[5]);
+		data.n_eat = ft_atoli(av[5]);
 	}
-	data->philo = init_philo(data->n);
-	if (!data->philo)
-		return (-1);
-	data->fork = malloc(sizeof(pthread_mutex_t) * data->n);
-	if (!data->fork)
+	data.philo = init_philo(data.n);
+	if (!data.philo || init_mutex() == -1)
 	{
-		free(data->philo);
+		free(data.philo);
 		return (-1);
 	}
-	data->n_dead = 0;
 	return (0);
 }

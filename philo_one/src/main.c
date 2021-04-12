@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:11:16 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/09 13:50:06 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/12 17:59:15 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,11 @@
 
 int	main(int ac, char **av)
 {
-	t_data	*data;
-
-	data = (t_data *)malloc(sizeof(t_data));
-	if ((ac != 6 && ac != 5) || init_data(av, data) == -1)
+	if ((ac != 6 && ac != 5) || init_data(av) == -1)
 	{
-		free(data);
 		printf("Arguments error.\n");
 		return (-1);
 	}
-	start_philo(data);
+	start_philo();
 	return (0);
 }

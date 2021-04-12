@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 18:04:05 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/07 18:06:00 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/12 17:29:17 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,40 @@ int			ft_isnumber(char *str)
                 ++i;
         }
         return (1);
+}
+
+unsigned int	get_time(void)
+{
+	unsigned int	time;
+	struct timeval	tv;
+
+	tv.tv_sec = 0;
+	tv.tv_usec = 0;
+	gettimeofday(&tv, NULL);
+	time = tv.tv_usec / 1000 - start_time;
+	return (time);
+}
+
+void			display_message(pthread_mutex_t *m, int x, int state)
+{
+	unsigned int	time;
+
+	time = get_time();
+	pthread_mutex_lock(m);
+	if (state == -1)
+	{
+		printf("%ums %d has taken a fork\n", time, x);
+		pthread_mutex_unlock(m);
+		return ;
+	}
+	printf("%ums %d ", time, x);
+	if (state == EAT)
+		printf("is eating\n");
+	else if (state == SLEEP)
+		printf("is sleeping\n");
+	else if (state == THINK)
+		printf("is thinking\n");
+	else if (state == DIE)
+		printf("died\n");
+	pthread_mutex_unlock(m);
 }
