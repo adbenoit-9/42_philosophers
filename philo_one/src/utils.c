@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 18:04:05 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/12 17:29:17 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/12 23:48:31 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,10 @@ void			display_message(pthread_mutex_t *m, int x, int state)
 {
 	unsigned int	time;
 
-	time = get_time();
+	// if (data.stop == 1)
+	// 	return ;
 	pthread_mutex_lock(m);
+	time = get_time();
 	if (state == -1)
 	{
 		printf("%ums %d has taken a fork\n", time, x);

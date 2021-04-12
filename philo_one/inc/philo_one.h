@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:11:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/12 22:03:59 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/12 23:31:59 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct	s_philo
 	unsigned int	last_eat;
 	int				n_eat;
 	int				is_dead;
+	int				is_eating;
 }				t_philo;
 
 typedef	struct	s_data
@@ -47,6 +48,7 @@ typedef	struct	s_data
 	pthread_mutex_t mutex;
 	int				n_eat;
 	int				n;
+	int				stop;
 	t_philo			*philo;
 }				t_data;
 

@@ -28,6 +28,7 @@ t_philo				*init_philo(int n)
 		philo[i].i = i + 1;
 		philo[i].is_dead = 0;
 		philo[i].n_eat = 0;
+		philo[i].is_eating = 0;
 		++i;
 	}
 	return (philo);
@@ -75,6 +76,7 @@ int 			init_data(char **av)
 		data.n_eat = ft_atoli(av[5]);
 	}
 	data.philo = init_philo(data.n);
+	data.stop = 0;
 	if (!data.philo || init_mutex() == -1)
 	{
 		free(data.philo);
