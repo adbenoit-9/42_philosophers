@@ -77,7 +77,7 @@ int 			init_data(char **av)
 		data.n_eat = ft_atoli(av[5]);
 	}
 	data.philo = init_philo(data.n);
-	data.stop = 0;
+	data.simul_state = RUN;
 	if (!data.philo || init_mutex() == -1)
 	{
 		free(data.philo);

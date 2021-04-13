@@ -17,7 +17,8 @@ static void		checkup(t_philo *philo)
 	unsigned int	time;
 
 	time = get_time();
-	while (get_time() - philo->last_eat <= data.time[DIE] || philo->state == EAT)
+	while ((get_time() - philo->last_eat <= data.time[DIE] || philo->state == EAT)
+	&& data.simul_state == RUN)
 		usleep(10);
 	philo_state(philo, philo->i + 1, DIE);
 }
@@ -27,11 +28,11 @@ static void		routine(t_philo *philo)
 	int			i;
 	pthread_t	t;
 
-	if (data.stop == 1)
+	if (data.simul_state > 0)
 		return ;
 	i = philo->i;
 	pthread_create(&t, NULL, (void *)checkup, philo);
-	while (philo->state != DIE && philo_hungry(philo) == 1 && data.stop == 0)
+	while (data.simul_state == RUN)
 	{
 		ft_take_forks(philo, i);
 		ft_eat(philo, i);

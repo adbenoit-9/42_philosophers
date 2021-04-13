@@ -6,22 +6,22 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 01:59:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/13 17:13:18 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/13 18:19:26 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-int		philo_hungry(t_philo *philo)
+static int		philo_hungry(t_philo *philo)
 {
 	if (data.n_eat == -1)
 		return (1);
-	if (philo->n_eat < data.n_eat)
+	if (philo->n_eat == data.n_eat)
 		return (1);
 	return (0);
 }
 
-void	ft_eat(t_philo *philo, int i)
+void			ft_eat(t_philo *philo, int i)
 {
 	unsigned int	start_eat;
 	
@@ -33,16 +33,16 @@ void	ft_eat(t_philo *philo, int i)
 	++(philo->n_eat);
 	pthread_mutex_unlock(&data.fork[i]);
 	pthread_mutex_unlock(&data.fork[(i + 1) % data.n]);
-	if (philo_hungry(philo) == 0)
+	if (philo_hungry(philo) == 0 && philo->state != DIE)
 		++data.done;
-	if (data.done == data.n)
+	if (data.done == data.n && data.simul_state == RUN)
 	{
+		data.simul_state = END;
 		printf("All philosophers ate at least %d times\n", data.n_eat);
-		data.stop = 1;
 	}
 }
 
-void	ft_take_forks(t_philo *philo, int i)
+void			ft_take_forks(t_philo *philo, int i)
 {
 	int first;
 	int second;
@@ -60,7 +60,7 @@ void	ft_take_forks(t_philo *philo, int i)
 	philo_state(philo, i + 1, TAKE_A_FORK);
 }
 
-void	ft_sleep(t_philo *philo, int i)
+void			ft_sleep(t_philo *philo, int i)
 {
 	unsigned int	time;
 
@@ -73,9 +73,12 @@ unsigned int	philo_state(t_philo *philo, int x, int state)
 {
 	unsigned int	time;
 
-	if (data.stop == 1)
-		return (0);
 	pthread_mutex_lock(&data.mutex);
+	if (data.simul_state != RUN)
+	{
+		pthread_mutex_unlock(&data.mutex);
+		return (0);
+	}
 	philo->state = state;
 	time = get_time();
 	if (state == TAKE_A_FORK)
@@ -89,7 +92,7 @@ unsigned int	philo_state(t_philo *philo, int x, int state)
 	else if (state == DIE)
 	{
 		printf("%ums %d die\n", time, x);
-		data.stop = 1;
+		data.simul_state = DEATH;
 	}
 	pthread_mutex_unlock(&data.mutex);
 	return (time);
