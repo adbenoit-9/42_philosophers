@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:11:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/13 02:03:39 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/13 02:47:09 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ unsigned int	start_time;
 
 typedef struct	s_philo
 {
+	pthread_t			t;
 	int				i;
 	pthread_mutex_t	mutex;
 	unsigned int	last_eat;
@@ -64,7 +65,7 @@ unsigned int	display_message(pthread_mutex_t *m, int x, int state);
 unsigned int	get_time(void);
 
 void			ft_eat(t_philo *philo, int i);
-void			ft_take_a_fork(t_philo *philo, int i);
+void			ft_take_forks(t_philo *philo, int i);
 void			ft_sleep(t_philo *philo, int i);
 
 

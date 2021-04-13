@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 02:07:52 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/13 02:08:10 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/13 03:21:46 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ unsigned int	display_message(pthread_mutex_t *m, int x, int state)
 	else if (state == THINK)
 		printf("%ums %d is thinking\n", time, x);
 	else if (state == DIE)
-		printf("%ums %d died\n", time, x);
+		printf("%ums %d die\n", time, x);
 	pthread_mutex_unlock(m);
 	return (time);
 }

@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 13:50:36 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/13 02:17:22 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/13 03:30:38 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ int		philo_hungry(t_philo *philo)
 
 void	check_state(t_philo *philo)
 {
+	unsigned int	time;
+
 	// pthread_mutex_lock(&philo->mutex);
-	while (get_time() - philo->last_eat < data.time[DIE] || philo->state == EAT)
-		usleep(10);
+	time = get_time();
+	while (time - philo->last_eat < data.time[DIE] || philo->state == EAT)
+		time = get_time();
 	philo->state = DIE;
 	display_message(&data.mutex, philo->i + 1, DIE);
-	if (philo->state == TAKE_A_FORK)
-		pthread_mutex_lock(&data.fork[philo->i]);
-	if (data.n_eat != -1)
-		return ;
-	data.stop = 1;
+	if (data.n_eat == -1)
+		data.stop = 1;
 	// pthread_mutex_unlock(&philo->mutex);
 }
 
@@ -47,7 +47,7 @@ void	routine(t_philo *philo)
 	pthread_create(&t, NULL, (void *)check_state, philo);
 	while (philo->state != DIE && philo_hungry(philo) == 1 && data.stop == 0)
 	{
-		ft_take_a_fork(philo, i);
+		ft_take_forks(philo, i);
 		ft_eat(philo, i);
 		ft_sleep(philo, i);
 		philo->state = THINK;
@@ -58,20 +58,19 @@ void	routine(t_philo *philo)
 void		handle_philo(void)
 {
 	int 		i;
-	pthread_t	t;
 
 	i = 0;
 	while (i < data.n)
 	{
 		data.philo[i].i = i;
 		data.philo[i].last_eat = 0;
-		pthread_create(&t, NULL, (void *)routine, &data.philo[i]);
+		pthread_create(&data.philo[i].t, NULL, (void *)routine, &data.philo[i]);
 		++i;
 	}
 	i = 0;
 	while (i < data.n)
 	{
-		pthread_join(t, NULL);
+		pthread_join(data.philo[i].t, NULL);
 		++i;
 	}
 }
