@@ -6,7 +6,7 @@
 #    By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/06 17:11:11 by adbenoit          #+#    #+#              #
-#    Updated: 2021/04/13 22:07:16 by adbenoit         ###   ########.fr        #
+#    Updated: 2021/04/13 22:12:53 by adbenoit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME			=	philo_three
 
 INC				=	inc/
 
-HEADER			=	$(INC)philo_one.h
+HEADER			=	$(INC)philo_three.h
 
 SRC_PATH		=	src/
 
