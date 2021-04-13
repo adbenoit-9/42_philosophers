@@ -5,20 +5,21 @@
 #                                                     +:+ +:+         +:+      #
 #    By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/03/09 14:24:26 by adbenoit          #+#    #+#              #
-#    Updated: 2021/04/06 17:10:28 by adbenoit         ###   ########.fr        #
+#    Created: 2021/04/06 17:11:11 by adbenoit          #+#    #+#              #
+#    Updated: 2021/04/13 22:10:05 by adbenoit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= philo_one
+NAME			=	philo_two
 
-INC				= 
+INC				=	inc/
 
-HEADER			=	$(INC)philo_one.h
+HEADER			=	$(INC)philo_two.h
 
-SRC_PATH		=	
+SRC_PATH		=	src/
 
-SRC				=	main.c
+SRC				=	main.c		init_data.c		philo_state.c \
+					utils.c		simulation.c
 
 CC				=	gcc
 CFLAGS			=	-Wall -Wextra -Werror -fsanitize=address
@@ -31,7 +32,7 @@ OBJ				=	$(addprefix $(OBJ_PATH),$(OBJ_NAME))
 
 $(NAME) : $(OBJ)
 	@printf "\n"
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
+	@$(CC) $(CFLAGS) -lpthread -o $(NAME) $(OBJ)
 	@echo "Compilation of \033[33;1m$(NAME)\033[0;1m: [\033[1;32mOK\033[0;1m]\033[0m"
 
 all: $(NAME) 
