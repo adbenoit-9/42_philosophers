@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:11:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/13 02:47:09 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/13 14:09:22 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef	struct	s_data
 	pthread_mutex_t	*fork;
 	pthread_mutex_t mutex;
 	int				n_eat;
+	int				done;
 	int				n;
 	int				stop;
 	t_philo			*philo;
@@ -68,5 +69,6 @@ void			ft_eat(t_philo *philo, int i);
 void			ft_take_forks(t_philo *philo, int i);
 void			ft_sleep(t_philo *philo, int i);
 
+int				philo_hungry(t_philo *philo);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 01:59:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/13 04:51:34 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/13 14:09:14 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,23 @@
 
 void	ft_eat(t_philo *philo, int i)
 {
-	unsigned int	need;
-	unsigned int	time;
+	unsigned int	start_eat;
 	
 	philo->state = EAT;
 	philo->last_eat = display_message(&data.mutex, i + 1, EAT);
-	need = data.time[EAT] * 1000;
-	time = philo->last_eat;
-	while (get_time() - time < need)
-	{
-		// printf("time = %u\tneed = %u\n", get_time() - time, need);
-		usleep(10); //ca marche pas wttttf
-	}
+	start_eat = philo->last_eat;
+	while (get_time() - start_eat < data.time[EAT])
+		usleep(10);
 	++(philo->n_eat);
 	pthread_mutex_unlock(&data.fork[i]);
 	pthread_mutex_unlock(&data.fork[(i + 1) % data.n]);
+	if (philo_hungry(philo) == 0)
+		++data.done;
+	if (data.done == data.n)
+	{
+		printf("All the philosophers ate %d times\n", data.n_eat);
+		data.stop = 1;
+	}
 	// usleep(100);
 }
 
@@ -53,7 +55,13 @@ void	ft_take_forks(t_philo *philo, int i)
 
 void	ft_sleep(t_philo *philo, int i)
 {
-	philo->state = SLEEP;
-	display_message(&data.mutex, i + 1, SLEEP);
-	usleep(data.time[SLEEP] * 1000);
+	unsigned int	time;
+
+	if (data.stop == 0)
+	{
+		philo->state = SLEEP;
+		time = display_message(&data.mutex, i + 1, SLEEP);
+		while (get_time() - time < data.time[SLEEP])
+			usleep(10);
+	}
 }
