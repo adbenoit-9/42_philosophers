@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 13:50:36 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/12 23:49:42 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/13 02:17:22 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,33 +21,19 @@ int		philo_hungry(t_philo *philo)
 	return (0);
 }
 
-int		eat(t_philo *philo, int i)
-{
-	pthread_mutex_lock(&data.fork[i + 1]);
-	philo->is_eating = 1;
-	philo->last_eat = get_time();
-	display_message(&data.mutex, i + 1, EAT);
-	usleep(data.time[EAT]);
-	++(philo->n_eat);
-	philo->is_eating = 0;
-	pthread_mutex_unlock(&data.fork[i]);
-	pthread_mutex_unlock(&data.fork[i + 1]);
-	return (0);
-}
-
 void	check_state(t_philo *philo)
 {
-	unsigned int	time;
-	
 	// pthread_mutex_lock(&philo->mutex);
-	time = get_time();
-	while (time - philo->last_eat < data.time[DIE] || philo->is_eating == 1)
-		time = get_time();
-	philo->is_dead = 1;
+	while (get_time() - philo->last_eat < data.time[DIE] || philo->state == EAT)
+		usleep(10);
+	philo->state = DIE;
 	display_message(&data.mutex, philo->i + 1, DIE);
-	if (data.n_eat == -1)
-		pthread_mutex_lock(&data.mutex);
-		// data.stop = 1;
+	if (philo->state == TAKE_A_FORK)
+		pthread_mutex_lock(&data.fork[philo->i]);
+	if (data.n_eat != -1)
+		return ;
+	data.stop = 1;
+	// pthread_mutex_unlock(&philo->mutex);
 }
 
 void	routine(t_philo *philo)
@@ -59,16 +45,14 @@ void	routine(t_philo *philo)
 		return ;
 	i = philo->i;
 	pthread_create(&t, NULL, (void *)check_state, philo);
-	while (philo->is_dead == 0 && philo_hungry(philo) == 1 && data.stop == 0)
+	while (philo->state != DIE && philo_hungry(philo) == 1 && data.stop == 0)
 	{
-		pthread_mutex_lock(&data.fork[i]);
-		display_message(&data.mutex, i + 1, -1);
-		eat(philo, i);
-		display_message(&data.mutex, i + 1, SLEEP);
-		usleep(data.time[SLEEP]);
+		ft_take_a_fork(philo, i);
+		ft_eat(philo, i);
+		ft_sleep(philo, i);
+		philo->state = THINK;
 		display_message(&data.mutex, i + 1, THINK);
 	}
-	// pthread_mutex_unlock(&data.mutex);
 }
 
 void		handle_philo(void)
@@ -100,7 +84,7 @@ int		start_philo(void)
 	tv.tv_sec = 0;
 	tv.tv_usec = 0;
 	gettimeofday(&tv, NULL);
-	start_time = tv.tv_usec / 1000;
+	start_time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
 	handle_philo();
 	i = 0;
 	while (i < data.n)

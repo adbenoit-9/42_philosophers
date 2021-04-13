@@ -12,7 +12,7 @@
 
 #include "philo_one.h"
 
-t_philo				*init_philo(int n)
+static t_philo	*init_philo(int n)
 {
 	t_philo	*philo;
 	int		i;
@@ -26,16 +26,15 @@ t_philo				*init_philo(int n)
 	while (i < n)
 	{
 		philo[i].i = i + 1;
-		philo[i].is_dead = 0;
+		philo[i].state = -1;
 		philo[i].n_eat = 0;
-		philo[i].is_eating = 0;
 		++i;
 	}
 	return (philo);
 	
 }
 
-int				init_mutex(void)
+static int		init_mutex(void)
 {
 	int	i;
 

@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 18:04:05 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/12 23:48:31 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/13 02:07:45 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,32 +67,6 @@ unsigned int	get_time(void)
 	tv.tv_sec = 0;
 	tv.tv_usec = 0;
 	gettimeofday(&tv, NULL);
-	time = tv.tv_usec / 1000 - start_time;
+	time = tv.tv_sec * 1000 + tv.tv_usec / 1000 - start_time;
 	return (time);
-}
-
-void			display_message(pthread_mutex_t *m, int x, int state)
-{
-	unsigned int	time;
-
-	// if (data.stop == 1)
-	// 	return ;
-	pthread_mutex_lock(m);
-	time = get_time();
-	if (state == -1)
-	{
-		printf("%ums %d has taken a fork\n", time, x);
-		pthread_mutex_unlock(m);
-		return ;
-	}
-	printf("%ums %d ", time, x);
-	if (state == EAT)
-		printf("is eating\n");
-	else if (state == SLEEP)
-		printf("is sleeping\n");
-	else if (state == THINK)
-		printf("is thinking\n");
-	else if (state == DIE)
-		printf("died\n");
-	pthread_mutex_unlock(m);
 }

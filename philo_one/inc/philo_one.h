@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:11:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/12 23:31:59 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/13 02:03:39 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define EAT 1
 # define SLEEP 2
 # define THINK 3
+# define TAKE_A_FORK 4
 
 unsigned int	start_time;
 
@@ -37,8 +38,7 @@ typedef struct	s_philo
 	pthread_mutex_t	mutex;
 	unsigned int	last_eat;
 	int				n_eat;
-	int				is_dead;
-	int				is_eating;
+	int				state;
 }				t_philo;
 
 typedef	struct	s_data
@@ -60,8 +60,12 @@ int				ft_isnumber(char *str);
 long int		ft_atoli(const char *str);
 
 int				start_philo(void);
-void			display_message(pthread_mutex_t *m, int x, int state);
+unsigned int	display_message(pthread_mutex_t *m, int x, int state);
 unsigned int	get_time(void);
+
+void			ft_eat(t_philo *philo, int i);
+void			ft_take_a_fork(t_philo *philo, int i);
+void			ft_sleep(t_philo *philo, int i);
 
 
 #endif
