@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:00:30 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/13 22:07:51 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/14 00:50:53 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	checkup(t_philo *philo)
 {
-	unsigned int	time;
+	size_t	time;
 
 	time = get_time();
 	while ((get_time() - philo->last_eat <= g_data.time[DIE] ||

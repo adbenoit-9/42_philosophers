@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 18:04:05 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/13 22:07:57 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/14 00:50:53 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ int				ft_isnumber(char *str)
 	return (1);
 }
 
-unsigned int	get_time(void)
+size_t	get_time(void)
 {
-	unsigned int	time;
+	size_t	time;
 	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
