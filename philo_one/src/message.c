@@ -6,19 +6,20 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 02:07:52 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/13 14:09:17 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/13 15:49:00 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-unsigned int	display_message(pthread_mutex_t *m, int x, int state)
+unsigned int	display_message(pthread_mutex_t *m, int x, int state, t_philo *philo)
 {
 	unsigned int	time;
 
 	if (data.stop == 1)
 		return (0);
 	pthread_mutex_lock(m);
+	philo->state = state;
 	time = get_time();
 	if (state == TAKE_A_FORK)
 		printf("%ums %d has taken a fork\n", time, x);

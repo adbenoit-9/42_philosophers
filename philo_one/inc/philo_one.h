@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:11:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/13 14:09:22 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/13 15:48:39 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int				ft_isnumber(char *str);
 long int		ft_atoli(const char *str);
 
 int				start_philo(void);
-unsigned int	display_message(pthread_mutex_t *m, int x, int state);
+unsigned int	display_message(pthread_mutex_t *m, int x, int state, t_philo *philo);
 unsigned int	get_time(void);
 
 void			ft_eat(t_philo *philo, int i);
