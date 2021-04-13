@@ -6,13 +6,13 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 18:04:05 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/13 03:54:29 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/13 21:40:19 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-static int	ft_isdigit(int c)
+static int		ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
 		return (1);
@@ -20,43 +20,43 @@ static int	ft_isdigit(int c)
 		return (0);
 }
 
-long int	ft_atoli(const char *str)
+long int		ft_atoli(const char *str)
 {
-        int             i;
-        long int        num;
-        int             neg;
+	int			i;
+	long int	num;
+	int			neg;
 
-        i = 0;
-        neg = 1;
-        num = 0;
-        while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'
-                || str[i] == '\v' || str[i] == '\f' || str[i] == '\r')
-                ++i;
-        if (str[i] == '-')
-                neg = -1;
-        if (str[i] == '-' || str[i] == '+')
-                ++i;
-        while (str[i] && str[i] >= '0' && str[i] <= '9')
-        {
-                num = num * 10 + (str[i] - 48);
-                ++i;
-        }
-        num = num * neg;
-        return (num);
+	i = 0;
+	neg = 1;
+	num = 0;
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'
+	|| str[i] == '\v' || str[i] == '\f' || str[i] == '\r')
+		++i;
+	if (str[i] == '-')
+		neg = -1;
+	if (str[i] == '-' || str[i] == '+')
+		++i;
+	while (str[i] && str[i] >= '0' && str[i] <= '9')
+	{
+		num = num * 10 + (str[i] - 48);
+		++i;
+	}
+	num = num * neg;
+	return (num);
 }
 
-int			ft_isnumber(char *str)
+int				ft_isnumber(char *str)
 {
-        int i;
+	int i;
 
-        i = 0;
-        while (str[i])
-        {
-                if (ft_isdigit(str[i]) == 0)
-                        return (0);
-                ++i;
-        }
-        return (1);
+	i = 0;
+	while (str[i])
+	{
+		if (ft_isdigit(str[i]) == 0)
+			return (0);
+		++i;
+	}
+	return (1);
 }
 
 unsigned int	get_time(void)
@@ -65,6 +65,6 @@ unsigned int	get_time(void)
 	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
-	time = tv.tv_sec * 1000 + tv.tv_usec / 1000 - start_time;
+	time = tv.tv_sec * 1000 + tv.tv_usec / 1000 - g_start_time;
 	return (time);
 }

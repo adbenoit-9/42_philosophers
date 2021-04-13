@@ -6,12 +6,12 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:11:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/13 17:59:47 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/13 21:41:58 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_ONE_H
-#define PHILO_ONE_H
+# define PHILO_ONE_H
 
 # include <pthread.h>
 # include <semaphore.h>
@@ -21,7 +21,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <sys/time.h>
-#include <string.h>
+# include <string.h>
 # include <errno.h>
 
 # define DIE 0
@@ -34,13 +34,12 @@
 # define END 1
 # define DEATH 2
 
-unsigned int	start_time;
+unsigned int	g_start_time;
 
 typedef struct	s_philo
 {
-	pthread_t			t;
+	pthread_t		t;
 	int				i;
-	pthread_mutex_t	mutex;
 	unsigned int	last_eat;
 	int				n_eat;
 	int				state;
@@ -58,13 +57,13 @@ typedef	struct	s_data
 	t_philo			*philo;
 }				t_data;
 
-t_data			data;
+t_data			g_data;
 
 int				ft_isnumber(char *str);
 long int		ft_atoli(const char *str);
 unsigned int	get_time(void);
 
-int				init_data(char **av);
+int				init_data(int ac, char **av);
 int				simulation(void);
 unsigned int	philo_state(t_philo *philo, int x, int state);
 void			ft_eat(t_philo *philo, int i);

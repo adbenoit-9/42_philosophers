@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_data.c                                          :+:      :+:    :+:   */
+/*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/07 14:50:25 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/07 17:40:47 by adbenoit         ###   ########.fr       */
+/*   Created: 2021/04/13 19:58:25 by adbenoit          #+#    #+#             */
+/*   Updated: 2021/04/13 21:48:07 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,55 +33,48 @@ static t_philo	*init_philo(int n)
 		++i;
 	}
 	return (philo);
-	
 }
 
-static int		init_mutex(void)
+static int		init_forks(void)
 {
 	int	i;
 
-	data.fork = malloc(sizeof(pthread_mutex_t) * data.n);
-	if (!data.fork)
-		return (-1);
-	pthread_mutex_init(&data.mutex, NULL);
+	g_data.fork = malloc(sizeof(pthread_mutex_t) * g_data.n);
+	if (!g_data.fork)
+		return (-2);
 	i = 0;
-	while (i < data.n)
+	while (i < g_data.n)
 	{
-		pthread_mutex_init(&data.fork[i], NULL);
-		pthread_mutex_init(&data.philo[i].mutex, NULL);
+		pthread_mutex_init(&g_data.fork[i], NULL);
 		++i;
 	}
 	return (0);
 }
 
-int 			init_data(char **av)
+int				init_data(int ac, char **av)
 {
 	int i;
 
-	if (ft_isnumber(av[1]) == 0)
+	g_data.fork = NULL;
+	g_data.philo = NULL;
+	if (ac != 6 && ac != 5)
 		return (-1);
-	data.n = ft_atoli(av[1]);
-	data.n_eat = -1;
-	i = 0;
-	while (i < 3)
-	{
-		if (ft_isnumber(av[i + 2]) == 0)
-			return (-1);
-		data.time[i] = ft_atoli(av[i + 2]);
+	i = 1;
+	while (av[i] && ft_isnumber(av[i]) == 1)
 		++i;
-	}
-	if (av[5])
-	{
-		if (ft_isnumber(av[5]) == 0)
-			return (-1);
-		data.n_eat = ft_atoli(av[5]);
-	}
-	data.philo = init_philo(data.n);
-	data.simul_state = RUN;
-	if (!data.philo || init_mutex() == -1)
-	{
-		free(data.philo);
+	if (i != ac)
 		return (-1);
-	}
-	return (0);
+	g_data.simul_state = RUN;
+	g_data.n = ft_atoli(av[1]);
+	g_data.n_eat = -1;
+	g_data.time[DIE] = ft_atoli(av[2]);
+	g_data.time[EAT] = ft_atoli(av[3]);
+	g_data.time[SLEEP] = ft_atoli(av[4]);
+	if (av[5])
+		g_data.n_eat = ft_atoli(av[5]);
+	g_data.philo = init_philo(g_data.n);
+	if (!g_data.philo)
+		return (-2);
+	pthread_mutex_init(&g_data.mutex, NULL);
+	return (init_forks());
 }

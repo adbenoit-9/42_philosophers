@@ -6,19 +6,40 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:11:16 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/13 17:16:27 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/13 21:46:57 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-int	main(int ac, char **av)
+static void	clean_forks(void)
 {
-	if ((ac != 6 && ac != 5) || init_data(av) == -1)
+	int	i;
+
+	i = 0;
+	while (i < g_data.n)
 	{
-		printf("Arguments error.\n");
-		return (-1);
+		pthread_mutex_destroy(&g_data.fork[i]);
+		++i;
 	}
-	simulation();
+	free(g_data.fork);
+}
+
+int			main(int ac, char **av)
+{
+	int ret;
+
+	ret = init_data(ac, av);
+	if (ret == -1)
+		printf("Arguments error.\n");
+	else if (ret == -2)
+		printf("Malloc error.\n");
+	else
+	{
+		simulation();
+		clean_forks();
+		pthread_mutex_destroy(&g_data.mutex);
+	}
+	free(g_data.philo);
 	return (0);
 }
