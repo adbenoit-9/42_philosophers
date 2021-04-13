@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:11:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/14 00:55:53 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/14 00:58:28 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ typedef struct	s_philo
 
 typedef	struct	s_data
 {
-	size_t			time[3];
 	pthread_mutex_t	*fork;
 	pthread_mutex_t mutex;
+	size_t			time[3];
 	int				n_eat;
-	int				done;
+	int				n_done;
 	int				n;
 	int				simul_state;
 	t_philo			*philo;
