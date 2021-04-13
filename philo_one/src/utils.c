@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 18:04:05 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/13 02:07:45 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/13 03:54:29 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ unsigned int	get_time(void)
 	unsigned int	time;
 	struct timeval	tv;
 
-	tv.tv_sec = 0;
-	tv.tv_usec = 0;
 	gettimeofday(&tv, NULL);
 	time = tv.tv_sec * 1000 + tv.tv_usec / 1000 - start_time;
 	return (time);

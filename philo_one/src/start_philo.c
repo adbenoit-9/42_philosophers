@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 13:50:36 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/13 03:30:38 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/13 03:57:09 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	check_state(t_philo *philo)
 
 	// pthread_mutex_lock(&philo->mutex);
 	time = get_time();
-	while (time - philo->last_eat < data.time[DIE] || philo->state == EAT)
+	while (time - philo->last_eat <= data.time[DIE] || philo->state == EAT)
 		time = get_time();
 	philo->state = DIE;
 	display_message(&data.mutex, philo->i + 1, DIE);
@@ -80,8 +80,6 @@ int		start_philo(void)
 	int 			i;
 	struct timeval	tv;
 
-	tv.tv_sec = 0;
-	tv.tv_usec = 0;
 	gettimeofday(&tv, NULL);
 	start_time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
 	handle_philo();
