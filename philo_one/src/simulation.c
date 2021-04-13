@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:00:30 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/13 21:32:59 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/13 21:56:37 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static void	routine(t_philo *philo)
 	if (g_data.simul_state > 0)
 		return ;
 	i = philo->i;
-	pthread_create(&t, NULL, (void *)checkup, philo);
+	if (pthread_create(&t, NULL, (void *)checkup, philo) != 0)
+		return ((void)printf("Thread Error.\n"));
 	while (g_data.simul_state == RUN)
 	{
 		ft_take_forks(philo, i);
@@ -46,13 +47,15 @@ int			simulation(void)
 	int				i;
 	struct timeval	tv;
 
-	gettimeofday(&tv, NULL);
+	if (gettimeofday(&tv, NULL) == -1)
+		return ((void)printf("Get Time Error.\n"));
 	g_start_time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
 	i = 0;
 	while (i < g_data.n)
 	{
-		pthread_create(&g_data.philo[i].t, NULL, (void *)routine,
-		&g_data.philo[i]);
+		if (pthread_create(&g_data.philo[i].t, NULL, (void *)routine,
+		&g_data.philo[i]) != 0)
+			return ((void)printf("Thread Error.\n"));
 		++i;
 	}
 	i = 0;
