@@ -6,7 +6,7 @@
 #    By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/06 17:11:11 by adbenoit          #+#    #+#              #
-#    Updated: 2021/04/13 02:08:34 by adbenoit         ###   ########.fr        #
+#    Updated: 2021/04/13 17:02:03 by adbenoit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ HEADER			=	$(INC)philo_one.h
 SRC_PATH		=	src/
 
 SRC				=	main.c		init_data.c		philo_state.c \
-					utils.c		start_philo.c	message.c
+					utils.c		philo_boring_life.c
 
 CC				=	gcc
 CFLAGS			=	-Wall -Wextra -Werror -fsanitize=address

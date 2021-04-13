@@ -28,6 +28,8 @@ static t_philo	*init_philo(int n)
 		philo[i].i = i + 1;
 		philo[i].state = -1;
 		philo[i].n_eat = 0;
+		philo[i].i = i;
+		philo[i].last_eat = 0;
 		++i;
 	}
 	return (philo);
