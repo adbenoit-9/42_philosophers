@@ -6,13 +6,13 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 18:04:05 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/13 21:58:32 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/14 00:55:20 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-static int		ft_isdigit(int c)
+static int	ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
 		return (1);
@@ -20,7 +20,7 @@ static int		ft_isdigit(int c)
 		return (0);
 }
 
-long int		ft_atoli(const char *str)
+long int	ft_atoli(const char *str)
 {
 	int			i;
 	long int	num;
@@ -45,7 +45,7 @@ long int		ft_atoli(const char *str)
 	return (num);
 }
 
-int				ft_isnumber(char *str)
+int			ft_isnumber(char *str)
 {
 	int i;
 
@@ -59,9 +59,9 @@ int				ft_isnumber(char *str)
 	return (1);
 }
 
-unsigned int	get_time(void)
+size_t		get_time(void)
 {
-	unsigned int	time;
+	size_t			time;
 	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);

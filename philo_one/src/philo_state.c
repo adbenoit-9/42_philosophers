@@ -6,13 +6,13 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 01:59:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/13 21:54:32 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/14 00:54:36 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-static int		philo_hungry(t_philo *philo)
+static int	philo_hungry(t_philo *philo)
 {
 	if (g_data.n_eat == -1)
 		return (1);
@@ -21,9 +21,9 @@ static int		philo_hungry(t_philo *philo)
 	return (0);
 }
 
-void			ft_eat(t_philo *philo, int i)
+void		ft_eat(t_philo *philo, int i)
 {
-	unsigned int	start_eat;
+	size_t	start_eat;
 
 	philo->state = EAT;
 	philo->last_eat = philo_state(philo, i + 1, EAT);
@@ -42,7 +42,7 @@ void			ft_eat(t_philo *philo, int i)
 	}
 }
 
-void			ft_take_forks(t_philo *philo, int i)
+void		ft_take_forks(t_philo *philo, int i)
 {
 	int first;
 	int second;
@@ -60,18 +60,18 @@ void			ft_take_forks(t_philo *philo, int i)
 	philo_state(philo, i + 1, TAKE_A_FORK);
 }
 
-void			ft_sleep(t_philo *philo, int i)
+void		ft_sleep(t_philo *philo, int i)
 {
-	unsigned int	time;
+	size_t	time;
 
 	time = philo_state(philo, i + 1, SLEEP);
 	while (get_time() - time < g_data.time[SLEEP])
 		usleep(10);
 }
 
-unsigned int	philo_state(t_philo *philo, int x, int state)
+size_t		philo_state(t_philo *philo, int x, int state)
 {
-	unsigned int	time;
+	size_t	time;
 
 	pthread_mutex_lock(&g_data.mutex);
 	if (g_data.simul_state != RUN)
@@ -82,16 +82,16 @@ unsigned int	philo_state(t_philo *philo, int x, int state)
 	philo->state = state;
 	time = get_time();
 	if (state == TAKE_A_FORK)
-		printf("%ums %d has taken a fork\n", time, x);
+		printf("%zums %d has taken a fork\n", time, x);
 	else if (state == EAT)
-		printf("%ums %d is eating\n", time, x);
+		printf("%zums %d is eating\n", time, x);
 	else if (state == SLEEP)
-		printf("%ums %d is sleeping\n", time, x);
+		printf("%zums %d is sleeping\n", time, x);
 	else if (state == THINK)
-		printf("%ums %d is thinking\n", time, x);
+		printf("%zums %d is thinking\n", time, x);
 	else if (state == DIE)
 	{
-		printf("%ums %d die\n", time, x);
+		printf("%zums %d die\n", time, x);
 		g_data.simul_state = DEATH;
 	}
 	pthread_mutex_unlock(&g_data.mutex);
