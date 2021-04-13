@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 01:59:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/13 16:59:17 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/13 17:13:18 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,9 @@ void	ft_eat(t_philo *philo, int i)
 		++data.done;
 	if (data.done == data.n)
 	{
-		printf("All the philosophers ate %d times\n", data.n_eat);
+		printf("All philosophers ate at least %d times\n", data.n_eat);
 		data.stop = 1;
 	}
-	// usleep(100);
 }
 
 void	ft_take_forks(t_philo *philo, int i)

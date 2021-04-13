@@ -52,7 +52,7 @@ static void	clean_forks(void)
 	}
 }
 
-int			philo_boring_life(void)
+int			simulation(void)
 {
 	int 			i;
 	struct timeval	tv;

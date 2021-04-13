@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:11:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/13 17:02:03 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/13 17:16:11 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int				init_data(char **av);
 int				ft_isnumber(char *str);
 long int		ft_atoli(const char *str);
 
-int				philo_boring_life(void);
+int				simulation(void);
 unsigned int	philo_state(t_philo *philo, int x, int state);
 unsigned int	get_time(void);
 
