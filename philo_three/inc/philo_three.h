@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 22:07:02 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/14 00:57:33 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/14 12:50:03 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 
 # define RUN 0
 # define END 1
-# define DEATH 2
+# define STOP 2
 
 size_t	g_start_time;
 

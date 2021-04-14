@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 01:59:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/14 00:57:33 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/14 15:07:56 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static int		philo_hungry(t_philo *philo)
 	if (g_data.n_eat == -1)
 		return (1);
 	if (philo->n_eat == g_data.n_eat)
-		return (1);
-	return (0);
+		return (0);
+	return (1);
 }
 
 void			ft_eat(t_philo *philo, int i)
@@ -92,7 +92,7 @@ size_t	philo_state(t_philo *philo, int x, int state)
 	else if (state == DIE)
 	{
 		printf("%zums %d die\n", time, x);
-		g_data.simul_state = DEATH;
+		g_data.simul_state = STOP;
 	}
 	pthread_mutex_unlock(&g_data.mutex);
 	return (time);
