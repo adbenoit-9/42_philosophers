@@ -6,13 +6,13 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 01:59:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/14 15:07:56 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/14 15:19:40 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_three.h"
 
-static int		philo_hungry(t_philo *philo)
+static int	philo_hungry(t_philo *philo)
 {
 	if (g_data.n_eat == -1)
 		return (1);
@@ -21,7 +21,15 @@ static int		philo_hungry(t_philo *philo)
 	return (1);
 }
 
-void			ft_eat(t_philo *philo, int i)
+void		ft_take_forks(t_philo *philo, int i)
+{
+	sem_wait(g_data.fork);
+	philo_state(philo, i + 1, TAKE_A_FORK);
+	sem_wait(g_data.fork);
+	philo_state(philo, i + 1, TAKE_A_FORK);
+}
+
+void		ft_eat(t_philo *philo, int i)
 {
 	size_t	start_eat;
 
@@ -31,8 +39,6 @@ void			ft_eat(t_philo *philo, int i)
 	while (get_time() - start_eat < g_data.time[EAT])
 		usleep(10);
 	++(philo->n_eat);
-	pthread_mutex_unlock(&g_data.fork[i]);
-	pthread_mutex_unlock(&g_data.fork[(i + 1) % g_data.n]);
 	if (philo_hungry(philo) == 0 && philo->state != DIE)
 		++g_data.n_done;
 	if (g_data.n_done == g_data.n && g_data.simul_state == RUN)
@@ -40,27 +46,11 @@ void			ft_eat(t_philo *philo, int i)
 		g_data.simul_state = END;
 		printf("All philosophers ate at least %d times\n", g_data.n_eat);
 	}
+	sem_post(g_data.fork);
+	sem_post(g_data.fork);
 }
 
-void			ft_take_forks(t_philo *philo, int i)
-{
-	int first;
-	int second;
-
-	first = i;
-	second = (i + 1) % g_data.n;
-	if (i % 2 == 0)
-	{
-		first = (i + 1) % g_data.n;
-		second = i;
-	}
-	pthread_mutex_lock(&g_data.fork[first]);
-	philo_state(philo, i + 1, TAKE_A_FORK);
-	pthread_mutex_lock(&g_data.fork[second]);
-	philo_state(philo, i + 1, TAKE_A_FORK);
-}
-
-void			ft_sleep(t_philo *philo, int i)
+void		ft_sleep(t_philo *philo, int i)
 {
 	size_t	time;
 
@@ -69,14 +59,14 @@ void			ft_sleep(t_philo *philo, int i)
 		usleep(10);
 }
 
-size_t	philo_state(t_philo *philo, int x, int state)
+size_t		philo_state(t_philo *philo, int x, int state)
 {
 	size_t	time;
 
-	pthread_mutex_lock(&g_data.mutex);
+	sem_wait(g_data.sem);
 	if (g_data.simul_state != RUN)
 	{
-		pthread_mutex_unlock(&g_data.mutex);
+		sem_post(g_data.sem);
 		return (0);
 	}
 	philo->state = state;
@@ -94,6 +84,6 @@ size_t	philo_state(t_philo *philo, int x, int state)
 		printf("%zums %d die\n", time, x);
 		g_data.simul_state = STOP;
 	}
-	pthread_mutex_unlock(&g_data.mutex);
+	sem_post(g_data.sem);
 	return (time);
 }

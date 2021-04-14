@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 19:58:25 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/13 22:07:33 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/14 15:19:30 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,17 @@ static t_philo	*init_philo(int n)
 	return (philo);
 }
 
-static int		init_forks(void)
+static int		init_sem(void)
 {
-	int	i;
-
-	g_data.fork = malloc(sizeof(pthread_mutex_t) * g_data.n);
+	g_data.fork = sem_open("fork", O_CREAT, 0, g_data.n);
 	if (!g_data.fork)
 		return (-2);
-	i = 0;
-	while (i < g_data.n)
+	g_data.sem = sem_open("sem", O_CREAT, 0, 1);
+	if (!g_data.sem)
 	{
-		pthread_mutex_init(&g_data.fork[i], NULL);
-		++i;
+		sem_close(g_data.fork);
+		sem_unlink("fork");
+		return (-2);
 	}
 	return (0);
 }
@@ -75,6 +74,5 @@ int				init_data(int ac, char **av)
 	g_data.philo = init_philo(g_data.n);
 	if (!g_data.philo)
 		return (-2);
-	pthread_mutex_init(&g_data.mutex, NULL);
-	return (init_forks());
+	return (init_sem());
 }
