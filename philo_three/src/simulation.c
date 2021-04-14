@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:00:30 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/14 19:13:05 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/14 19:13:36 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void		kill_process(int n)
 int			simulation(void)
 {
 	int				i;
-	// int				ret;
 	struct timeval	tv;
 
 	if (gettimeofday(&tv, NULL) == -1)
