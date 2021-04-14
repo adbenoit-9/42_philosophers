@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 22:07:02 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/14 15:21:05 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/14 16:40:32 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # include <sys/time.h>
 # include <string.h>
 # include <errno.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <signal.h>
 
 # define DIE 0
 # define EAT 1
@@ -38,11 +41,11 @@ size_t	g_start_time;
 
 typedef struct	s_philo
 {
-	pthread_t	t;
-	int			i;
-	size_t		last_eat;
-	int			n_eat;
-	int			state;
+	pid_t	pid;
+	int		i;
+	size_t	last_eat;
+	int		n_eat;
+	int		state;
 }				t_philo;
 
 typedef	struct	s_data
