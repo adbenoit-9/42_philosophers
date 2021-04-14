@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:11:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/14 14:48:50 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/14 15:09:48 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ size_t	g_start_time;
 typedef struct	s_philo
 {
 	pthread_t	t;
-	sem_t		*sem;
 	int			i;
 	size_t		last_eat;
 	int			n_eat;
@@ -51,7 +50,6 @@ typedef	struct	s_data
 	size_t		time[3];
 	sem_t		*fork;
 	sem_t		*sem;
-	sem_t		*sem1;
 	int			n_eat;
 	int			n_done;
 	int			n;

@@ -6,13 +6,13 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 01:59:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/14 15:06:20 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/14 15:17:02 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_two.h"
 
-static int		philo_hungry(t_philo *philo)
+static int	philo_hungry(t_philo *philo)
 {
 	if (g_data.n_eat == -1)
 		return (1);
@@ -21,7 +21,7 @@ static int		philo_hungry(t_philo *philo)
 	return (1);
 }
 
-void			ft_take_forks(t_philo *philo, int i)
+void		ft_take_forks(t_philo *philo, int i)
 {
 	sem_wait(g_data.fork);
 	philo_state(philo, i + 1, TAKE_A_FORK);
@@ -29,7 +29,7 @@ void			ft_take_forks(t_philo *philo, int i)
 	philo_state(philo, i + 1, TAKE_A_FORK);
 }
 
-void			ft_eat(t_philo *philo, int i)
+void		ft_eat(t_philo *philo, int i)
 {
 	size_t	start_eat;
 
@@ -50,7 +50,7 @@ void			ft_eat(t_philo *philo, int i)
 	sem_post(g_data.fork);
 }
 
-void			ft_sleep(t_philo *philo, int i)
+void		ft_sleep(t_philo *philo, int i)
 {
 	size_t	time;
 
@@ -59,7 +59,7 @@ void			ft_sleep(t_philo *philo, int i)
 		usleep(10);
 }
 
-size_t	philo_state(t_philo *philo, int x, int state)
+size_t		philo_state(t_philo *philo, int x, int state)
 {
 	size_t	time;
 
