@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 19:58:25 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/15 16:44:09 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/20 15:21:57 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,27 @@ static t_philo	*init_philo(int n)
 
 static int		init_sem(void)
 {
+	int i;
+
 	g_data.fork = sem_open("fork", O_CREAT, 0, g_data.n / 2);
 	if (!g_data.fork)
 		return (-2);
 	g_data.sem = sem_open("sem", O_CREAT, 0, 1);
-	g_data.sem1 = sem_open("sem1", O_CREAT, 0, 1);
-	g_data.sem2 = sem_open("sem1", O_CREAT, 0, 1);
+	g_data.wait_all = sem_open("wait", O_CREAT, 0, 0);
+	g_data.done_eat = sem_open("eat", O_CREAT, 0, g_data.n);
+	g_data.dead = sem_open("dead", O_CREAT, 0, 1);
 	if (!g_data.sem)
 	{
 		sem_close(g_data.fork);
 		sem_unlink("fork");
 		return (-2);
+	}
+	i = 0;
+	while (i < g_data.n)
+	{
+		sem_wait(g_data.wait_all);
+		sem_wait(g_data.done_eat);
+		++i;
 	}
 	return (0);
 }

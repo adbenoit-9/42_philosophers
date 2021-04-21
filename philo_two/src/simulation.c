@@ -6,13 +6,13 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:00:30 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/14 00:50:53 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/15 01:27:55 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_two.h"
 
-static void	checkup(t_philo *philo)
+static void	ft_isalive(t_philo *philo)
 {
 	size_t	time;
 
@@ -31,7 +31,7 @@ static void	routine(t_philo *philo)
 	if (g_data.simul_state > 0)
 		return ;
 	i = philo->i;
-	if (pthread_create(&t, NULL, (void *)checkup, philo) != 0)
+	if (pthread_create(&t, NULL, (void *)ft_isalive, philo) != 0)
 		return ((void)printf("Thread Error.\n"));
 	while (g_data.simul_state == RUN)
 	{

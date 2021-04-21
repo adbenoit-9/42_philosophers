@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 22:07:02 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/15 16:45:13 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/20 15:20:47 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ typedef	struct	s_data
 	size_t		time[3];
 	sem_t		*fork;
 	sem_t		*sem;
-	sem_t		*sem1;
-	sem_t		*sem2;
+	sem_t		*dead;
+	sem_t		*done_eat;
+	sem_t		*wait_all;
 	int			n_eat;
-	int			n_done;
 	int			n;
 	int			simul_state;
 	t_philo		*philo;

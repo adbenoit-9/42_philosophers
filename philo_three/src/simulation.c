@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:00:30 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/15 19:59:37 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/21 18:23:09 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static void	ft_isalive(t_philo *philo)
 	size_t	time;
 
 	time = get_time();
-	test = 3;
 	while ((get_time() - philo->last_eat <= g_data.time[DIE] ||
 	philo->state == EAT) && g_data.simul_state != STOP)
 		usleep(10);
@@ -39,7 +38,7 @@ static void	routine(t_philo *philo)
 		sem_post(g_data.sem);
 		exit(-1);
 	}
-	while (g_data.simul_state != STOP)
+	while (g_data.simul_state == RUN)
 	{
 		ft_take_forks(philo, i);
 		ft_eat(philo, i);
@@ -61,24 +60,36 @@ void		kill_process(int n)
 	}
 }
 
-void		ft_isdone(void *ptr)
+void		ft_isdone(void)
 {
-	int i;
-	ptr = 0;
-	i = 0;
-	while (1)
+	int status;
+	// printf("All philosophers ate at least %d times\n", g_data.n_eat);
+	int i = 0;
+	sem_wait(g_data.dead);
+	while (i < g_data.n)
 	{
-		sem_wait(g_data.sem1);
-		// exit(0);
-		return ;
+		sem_wait(g_data.dead);
+		waitpid(-1, &status, 0);
+		if (WEXITSTATUS(status) == END)
+		{
+			printf("All philosophers ate at least %d times\n", g_data.n_eat);
+			exit (0);
+		}
+		else if (WEXITSTATUS(status) == STOP)
+		{
+			printf("dead\n");
+			return ;
+		}
+		++i;
 	}
+	sem_post(g_data.dead);
 }
 
 int			simulation(void)
 {
 	int				i;
 	struct timeval	tv;
-	int				status;
+	// int				status;
 	// pthread_t		t;
 
 	// pthread_create(&t, NULL, (void *)ft_isdone, NULL);
@@ -89,6 +100,7 @@ int			simulation(void)
 		if (gettimeofday(&tv, NULL) == -1)
 			return (printf("Get Time Error.\n"));
 		g_start_time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+		sem_post(g_data.wait_all);
 		if (g_data.philo[i].pid == -1)
 			return (printf("Fork Error.\n"));
 		if (g_data.philo[i].pid == 0)
@@ -96,22 +108,9 @@ int			simulation(void)
 			routine(&g_data.philo[i]);
 		}
 		++i;
+		// usleep(100);
 	}
-	// sem_wait(g_data.sem1);
-	i = 0;
-	while (i < g_data.n)
-	{
-		waitpid(-1, &status, 0);
-		printf("%d test\n", test);
-		if (WEXITSTATUS(status) == END)
-		{
-			printf("All philosophers ate at least %d times\n", g_data.n_eat);
-			exit (0);
-		}
-		else if (WEXITSTATUS(status) == STOP)
-			printf("dead\n");
-		++i;
-	}
+	ft_isdone();
 	kill_process(g_data.n);
 	return (0);
 }

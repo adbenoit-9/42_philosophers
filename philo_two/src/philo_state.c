@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 01:59:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/14 15:17:02 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/15 13:34:46 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void		ft_take_forks(t_philo *philo, int i)
 {
 	sem_wait(g_data.fork);
 	philo_state(philo, i + 1, TAKE_A_FORK);
-	sem_wait(g_data.fork);
 	philo_state(philo, i + 1, TAKE_A_FORK);
 }
 
@@ -46,7 +45,6 @@ void		ft_eat(t_philo *philo, int i)
 		g_data.simul_state = END;
 		printf("All philosophers ate at least %d times\n", g_data.n_eat);
 	}
-	sem_post(g_data.fork);
 	sem_post(g_data.fork);
 }
 
