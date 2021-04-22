@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 01:59:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/20 15:29:22 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/22 18:26:40 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void		ft_eat(t_philo *philo, int i)
 	if (philo->n_eat == g_data.n_eat)
 	{
 		sem_wait(g_data.done_eat);
+		sem_post(g_data.dead);
 		g_data.simul_state = END;
 	}
 	sem_post(g_data.fork);
@@ -77,11 +78,8 @@ size_t		philo_state(t_philo *philo, int x, int state)
 		printf("%zums %d is thinking\n", time, x);
 	else if (state == DIE)
 	{
-		// sem_wait(g_data.done);
-		// test = 90;
-		// sem_post(g_data.done);
 		printf("%zums %d die\n", time, x);
-		// sem_wait(g_data.dead);
+		sem_wait(g_data.dead);
 		g_data.simul_state = STOP;
 	}
 	sem_post(g_data.sem);
