@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:00:30 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/22 15:45:26 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/22 15:53:05 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,62 +48,21 @@ void	routine(t_philo *philo)
 	return ;
 }
 
-void		kill_process(int n)
-{
-	int	i;
-
-	i = 0;
-	while (i < n)
-	{
-		kill(g_data.philo[i].pid, SIGINT);
-		++i;
-	}
-}
-
-void		ft_isdone(void)
-{
-	int status;
-	// printf("All philosophers ate at least %d times\n", g_data.n_eat);
-	int i = 0;
-	sem_wait(g_data.dead);
-	while (i < g_data.n)
-	{
-		sem_wait(g_data.dead);
-		waitpid(-1, &status, 0);
-		if (WEXITSTATUS(status) == END)
-		{
-			printf("All philosophers ate at least %d times\n", g_data.n_eat);
-			exit (0);
-		}
-		else if (WEXITSTATUS(status) == STOP)
-		{
-			printf("dead\n");
-			return ;
-		}
-		++i;
-	}
-	sem_post(g_data.dead);
-}
-
 int			simulation(void)
 {
 	int				i;
 	struct timeval	tv;
 	pid_t			pid;
-	// int				status;
-	// pthread_t		t;
 
-	// pthread_create(&t, NULL, (void *)ft_isdone, NULL);
-	i = 0;
-	pid = 1;
 	if (gettimeofday(&tv, NULL) == -1)
 		return (printf("Get Time Error.\n"));
 	g_start_time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+	i = 0;
+	pid = 1;
 	while (i < g_data.n && pid > 0)
 	{
 		pid = fork();
-		// pid = g_data.philo[i].pid;
-		if (g_data.philo[i].pid == -1)
+		if (pid == -1)
 			return (printf("Fork Error.\n"));
 		++i;
 	}
@@ -113,7 +72,7 @@ int			simulation(void)
 		if (gettimeofday(&tv, NULL) == -1)
 			return (printf("Get Time Error.\n"));
 		g_start_time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
-		routine(&g_data.philo[i]);
+		routine(&g_data.philo[i - 1]);
 	}
 	usleep(100000);
 	i = 0;
