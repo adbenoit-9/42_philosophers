@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:00:30 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/21 18:23:09 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/22 15:45:26 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,20 @@ static void	ft_isalive(t_philo *philo)
 	philo_state(philo, philo->i + 1, DIE);
 }
 
-static void	routine(t_philo *philo)
+void	routine(t_philo *philo)
 {
 	int			i;
 	pthread_t	t;
 
 	if (g_data.simul_state > 0)
-		exit(g_data.simul_state) ;
+		return ;
 	i = philo->i;
 	if (pthread_create(&t, NULL, (void *)ft_isalive, philo) != 0)
 	{
 		sem_wait(g_data.sem);
 		printf("Thread Error.\n");
 		sem_post(g_data.sem);
-		exit(-1);
+		return ;
 	}
 	while (g_data.simul_state == RUN)
 	{
@@ -45,7 +45,7 @@ static void	routine(t_philo *philo)
 		ft_sleep(philo, i);
 		philo_state(philo, i + 1, THINK);
 	}
-	exit(g_data.simul_state);
+	return ;
 }
 
 void		kill_process(int n)
@@ -89,28 +89,40 @@ int			simulation(void)
 {
 	int				i;
 	struct timeval	tv;
+	pid_t			pid;
 	// int				status;
 	// pthread_t		t;
 
 	// pthread_create(&t, NULL, (void *)ft_isdone, NULL);
 	i = 0;
-	while (i < g_data.n)
+	pid = 1;
+	if (gettimeofday(&tv, NULL) == -1)
+		return (printf("Get Time Error.\n"));
+	g_start_time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+	while (i < g_data.n && pid > 0)
 	{
-		g_data.philo[i].pid = fork();
+		pid = fork();
+		// pid = g_data.philo[i].pid;
+		if (g_data.philo[i].pid == -1)
+			return (printf("Fork Error.\n"));
+		++i;
+	}
+	if (pid == 0)
+	{
+		sem_wait(g_data.wait_all);
 		if (gettimeofday(&tv, NULL) == -1)
 			return (printf("Get Time Error.\n"));
 		g_start_time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
-		sem_post(g_data.wait_all);
-		if (g_data.philo[i].pid == -1)
-			return (printf("Fork Error.\n"));
-		if (g_data.philo[i].pid == 0)
-		{
-			routine(&g_data.philo[i]);
-		}
-		++i;
-		// usleep(100);
+		routine(&g_data.philo[i]);
 	}
-	ft_isdone();
-	kill_process(g_data.n);
+	usleep(100000);
+	i = 0;
+	while (i < g_data.n && pid > 0)
+	{
+		sem_post(g_data.wait_all);
+		++i;
+	}
+	// ft_isdone();
+	// kill_process(g_data.n);
 	return (0);
 }
