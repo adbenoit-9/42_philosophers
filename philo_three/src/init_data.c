@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 19:58:25 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/22 15:42:40 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/23 17:44:18 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ static int		init_sem(void)
 		return (-2);
 	g_data.sem = sem_open("sem", O_CREAT, 0, 1);
 	g_data.wait_all = sem_open("wait", O_CREAT, 0, 0);
-	g_data.done_eat = sem_open("eat", O_CREAT, 0, g_data.n);
-	g_data.dead = sem_open("dead", O_CREAT, 0, 1);
+	g_data.done_eat = sem_open("eat", O_CREAT, 0, 0);
+	g_data.dead = sem_open("dead", O_CREAT, 0, 0);
 	if (!g_data.sem)
 	{
 		sem_close(g_data.fork);

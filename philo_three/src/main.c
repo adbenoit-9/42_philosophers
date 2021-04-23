@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:11:16 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/22 14:39:13 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/23 16:48:46 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,9 @@ int			main(int ac, char **av)
 		printf("Malloc error.\n");
 	else
 	{
-		test = 1;
 		simulation();
 		sem_close(g_data.fork);
-		sem_unlink("fork");
 		sem_close(g_data.sem);
-		sem_unlink("sem");
 	}
 	free(g_data.philo);
 	return (0);

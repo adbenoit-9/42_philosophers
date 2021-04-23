@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 22:07:02 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/20 15:20:47 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/23 17:43:07 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef	struct	s_data
 	sem_t		*done_eat;
 	sem_t		*wait_all;
 	int			n_eat;
+	int			n_done_eat;
 	int			n;
 	int			simul_state;
 	t_philo		*philo;

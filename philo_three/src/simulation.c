@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:00:30 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/22 18:42:51 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/23 18:06:00 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static void	ft_isalive(t_philo *philo)
 	while ((get_time() - philo->last_eat <= g_data.time[DIE] ||
 	philo->state == EAT) && g_data.simul_state != STOP)
 		usleep(10);
+	if (philo->state == TAKE_A_FORK)
+		sem_post(g_data.fork);
 	philo_state(philo, philo->i + 1, DIE);
 }
 
@@ -32,21 +34,40 @@ void		ft_isdone(void)
  	while (i < g_data.n)
  	{
  		waitpid(-1, &status, 0);
-		if (g_data.simul_state != STOP)
-			g_data.simul_state = WEXITSTATUS(status);
-		printf("status = %d\n", g_data.simul_state);
- 		if (WEXITSTATUS(status) == END)
- 		{
- 			printf("All philosophers ate at least %d times\n", g_data.n_eat);
- 			// exit (0);
- 		}
- 		else if (WEXITSTATUS(status) == STOP)
- 		{
- 			printf("dead\n");
- 			return ;
- 		}
  		++i;
  	}
+ 	return ;
+ }
+
+ void		ft_dead(void)
+ {
+	int	i;
+	
+	sem_wait(g_data.dead);
+	i = 0;
+	while (i < g_data.n)
+	{
+		kill(g_data.philo[i].pid, SIGINT);
+		++i;
+	}
+	exit(0);
+ }
+
+ void	ft_done_eat(void)
+ {
+	int	i;
+
+	sem_wait(g_data.done_eat);
+	++g_data.n_done_eat;
+	if (g_data.n_done_eat == g_data.n)
+		g_data.simul_state = END;
+	i = 0;
+	while (i < g_data.n)
+	{
+		kill(g_data.philo[i].pid, SIGINT);
+		++i;
+	}
+	printf("All philosophers ate at least %d times\n", g_data.n_eat);
  }
 
 void	routine(t_philo *philo)
@@ -54,7 +75,6 @@ void	routine(t_philo *philo)
 	int			i;
 	pthread_t	t;
 
-	sem_wait(g_data.dead);
 	if (g_data.simul_state == STOP)
 		exit(STOP);
 	i = philo->i;
@@ -65,14 +85,13 @@ void	routine(t_philo *philo)
 		sem_post(g_data.sem);
 		exit(-1);
 	}
-	while (g_data.simul_state == RUN)
+	while (g_data.simul_state != END)
 	{
 		ft_take_forks(philo, i);
 		ft_eat(philo, i);
 		ft_sleep(philo, i);
-		philo_state(philo, i + 1, THINK);
 	}
-	exit(g_data.simul_state);
+	exit(END);
 }
 
 int			simulation(void)
@@ -80,15 +99,22 @@ int			simulation(void)
 	int				i;
 	struct timeval	tv;
 	pid_t			pid;
+	pthread_t		t;
+	pthread_t		t1;
 
 	if (gettimeofday(&tv, NULL) == -1)
 		return (printf("Get Time Error.\n"));
 	g_start_time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+	if (pthread_create(&t, NULL, (void *)ft_dead, NULL) != 0)
+		return (printf("Thread Error.\n"));
+	if (pthread_create(&t1, NULL, (void *)ft_done_eat, NULL) != 0)
+		return (printf("Thread Error.\n"));
 	i = 0;
 	pid = 1;
 	while (i < g_data.n && pid > 0)
 	{
 		pid = fork();
+		g_data.philo[i].pid = pid;
 		if (pid == -1)
 			return (printf("Fork Error.\n"));
 		++i;
