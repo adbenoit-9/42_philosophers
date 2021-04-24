@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:00:30 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/24 15:31:45 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/24 15:36:43 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	ft_launch_philo(int *pid)
 		}
 		++i;
 	}
-	if (pid == 0)
+	if (*pid == 0)
 		routine(&g_data.philo[i - 1]);
 	usleep(100000);
 	return (0);
