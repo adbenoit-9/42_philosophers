@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:00:30 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/24 15:36:43 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/24 16:03:50 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static int	ft_launch_philo(int *pid)
 	}
 	if (*pid == 0)
 		routine(&g_data.philo[i - 1]);
-	usleep(100000);
 	return (0);
 }
 
@@ -61,6 +60,7 @@ static void	ft_wait_philo(int pid)
  	int i;
  	int status;
 
+	usleep(100000);
 	i = 0;
 	while (i < g_data.nb_philo && pid > 0)
 	{
