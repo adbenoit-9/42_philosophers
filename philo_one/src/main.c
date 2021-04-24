@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:11:16 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/13 21:46:57 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/24 12:51:03 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	clean_forks(void)
 	int	i;
 
 	i = 0;
-	while (i < g_data.n)
+	while (i < g_data.nb_philo)
 	{
 		pthread_mutex_destroy(&g_data.fork[i]);
 		++i;
@@ -38,7 +38,7 @@ int			main(int ac, char **av)
 	{
 		simulation();
 		clean_forks();
-		pthread_mutex_destroy(&g_data.mutex);
+		pthread_mutex_destroy(&g_data.display);
 	}
 	free(g_data.philo);
 	return (0);

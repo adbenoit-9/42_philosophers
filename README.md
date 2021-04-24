@@ -1,2 +1,2 @@
 # PHILOSOPHERS
-*I’ve never thought philosophy would be so deadly.*
+*I’ve never thought philosophy would be so is_deadly.*

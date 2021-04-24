@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 18:04:05 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/14 00:55:20 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/24 13:08:55 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int			ft_isnumber(char *str)
 	return (1);
 }
 
-size_t		get_time(void)
+size_t		current_timestamp(void)
 {
 	size_t			time;
 	struct timeval	tv;

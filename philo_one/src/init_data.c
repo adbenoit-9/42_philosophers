@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 19:58:25 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/13 21:48:07 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/24 12:59:36 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static t_philo	*init_philo(int n)
 	{
 		philo[i].i = i + 1;
 		philo[i].state = -1;
-		philo[i].n_eat = 0;
+		philo[i].nb_meal = 0;
 		philo[i].i = i;
-		philo[i].last_eat = 0;
+		philo[i].last_meal = 0;
 		++i;
 	}
 	return (philo);
@@ -39,11 +39,11 @@ static int		init_forks(void)
 {
 	int	i;
 
-	g_data.fork = malloc(sizeof(pthread_mutex_t) * g_data.n);
+	g_data.fork = malloc(sizeof(pthread_mutex_t) * g_data.nb_philo);
 	if (!g_data.fork)
 		return (-2);
 	i = 0;
-	while (i < g_data.n)
+	while (i < g_data.nb_philo)
 	{
 		pthread_mutex_init(&g_data.fork[i], NULL);
 		++i;
@@ -65,16 +65,16 @@ int				init_data(int ac, char **av)
 	if (i != ac)
 		return (-1);
 	g_data.simul_state = RUN;
-	g_data.n = ft_atoli(av[1]);
-	g_data.n_eat = -1;
+	g_data.nb_philo = ft_atoli(av[1]);
+	g_data.nb_meal_needed = -1;
 	g_data.time[DIE] = ft_atoli(av[2]);
 	g_data.time[EAT] = ft_atoli(av[3]);
 	g_data.time[SLEEP] = ft_atoli(av[4]);
 	if (av[5])
-		g_data.n_eat = ft_atoli(av[5]);
-	g_data.philo = init_philo(g_data.n);
+		g_data.nb_meal_needed = ft_atoli(av[5]);
+	g_data.philo = init_philo(g_data.nb_philo);
 	if (!g_data.philo)
 		return (-2);
-	pthread_mutex_init(&g_data.mutex, NULL);
+	pthread_mutex_init(&g_data.display, NULL);
 	return (init_forks());
 }

@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:00:30 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/15 01:27:55 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/24 13:08:55 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static void	ft_isalive(t_philo *philo)
 {
 	size_t	time;
 
-	time = get_time();
-	while ((get_time() - philo->last_eat <= g_data.time[DIE] ||
+	time = current_timestamp();
+	while ((current_timestamp() - philo->last_meal <= g_data.time[DIE] ||
 	philo->state == EAT) && g_data.simul_state == RUN)
 		usleep(10);
 	philo_state(philo, philo->i + 1, DIE);
@@ -51,7 +51,7 @@ int			simulation(void)
 		return (printf("Get Time Error.\n"));
 	g_start_time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
 	i = 0;
-	while (i < g_data.n)
+	while (i < g_data.nb_philo)
 	{
 		if (pthread_create(&g_data.philo[i].t, NULL, (void *)routine,
 		&g_data.philo[i]) != 0)
@@ -59,7 +59,7 @@ int			simulation(void)
 		++i;
 	}
 	i = 0;
-	while (i < g_data.n)
+	while (i < g_data.nb_philo)
 	{
 		pthread_join(g_data.philo[i].t, NULL);
 		++i;

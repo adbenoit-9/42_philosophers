@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 19:58:25 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/15 13:34:09 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/24 13:18:40 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,10 @@ static t_philo	*init_philo(int n)
 	i = 0;
 	while (i < n)
 	{
-		philo[i].i = i + 1;
 		philo[i].state = -1;
-		philo[i].n_eat = 0;
+		philo[i].nb_meal = 0;
 		philo[i].i = i;
-		philo[i].last_eat = 0;
+		philo[i].last_meal = 0;
 		++i;
 	}
 	return (philo);
@@ -37,14 +36,15 @@ static t_philo	*init_philo(int n)
 
 static int		init_sem(void)
 {
-	g_data.fork = sem_open("fork", O_CREAT, 0, g_data.n / 2);
+	sem_unlink("fork");
+	sem_unlink("display");
+	g_data.fork = sem_open("fork", O_CREAT, 0, g_data.nb_philo / 2);
 	if (!g_data.fork)
 		return (-2);
-	g_data.sem = sem_open("sem", O_CREAT, 0, 1);
-	if (!g_data.sem)
+	g_data.display = sem_open("display", O_CREAT, 0, 1);
+	if (!g_data.display)
 	{
 		sem_close(g_data.fork);
-		sem_unlink("fork");
 		return (-2);
 	}
 	return (0);
@@ -54,7 +54,6 @@ int				init_data(int ac, char **av)
 {
 	int i;
 
-	g_data.fork = NULL;
 	g_data.philo = NULL;
 	if (ac != 6 && ac != 5)
 		return (-1);
@@ -64,14 +63,14 @@ int				init_data(int ac, char **av)
 	if (i != ac)
 		return (-1);
 	g_data.simul_state = RUN;
-	g_data.n = ft_atoli(av[1]);
-	g_data.n_eat = -1;
+	g_data.nb_philo = ft_atoli(av[1]);
+	g_data.nb_meal_needed = -1;
 	g_data.time[DIE] = ft_atoli(av[2]);
 	g_data.time[EAT] = ft_atoli(av[3]);
 	g_data.time[SLEEP] = ft_atoli(av[4]);
 	if (av[5])
-		g_data.n_eat = ft_atoli(av[5]);
-	g_data.philo = init_philo(g_data.n);
+		g_data.nb_meal_needed = ft_atoli(av[5]);
+	g_data.philo = init_philo(g_data.nb_philo);
 	if (!g_data.philo)
 		return (-2);
 	return (init_sem());
