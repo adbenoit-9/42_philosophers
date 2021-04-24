@@ -6,7 +6,7 @@
 #    By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/06 17:11:11 by adbenoit          #+#    #+#              #
-#    Updated: 2021/04/13 22:12:53 by adbenoit         ###   ########.fr        #
+#    Updated: 2021/04/24 14:44:37 by adbenoit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ HEADER			=	$(INC)philo_three.h
 SRC_PATH		=	src/
 
 SRC				=	main.c		init_data.c		philo_state.c \
-					utils.c		simulation.c
+					utils.c		simulation.c	handle_process.c \
+					philo_health.c
 
 CC				=	gcc
 CFLAGS			=	-Wall -Wextra -Werror -fsanitize=address
