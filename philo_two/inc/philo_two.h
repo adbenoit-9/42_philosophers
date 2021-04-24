@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:11:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/24 13:08:55 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/24 15:42:46 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef	struct	s_data
 {
 	size_t		time[3];
 	sem_t		*fork;
-	sem_t		*sem;
+	sem_t		*display;
 	int			nb_meal_needed;
 	int			nb_fed;
 	int			nb_philo;

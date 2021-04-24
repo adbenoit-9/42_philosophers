@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 19:58:25 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/24 12:59:36 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/24 15:43:35 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static t_philo	*init_philo(int n)
 	i = 0;
 	while (i < n)
 	{
-		philo[i].i = i + 1;
 		philo[i].state = -1;
 		philo[i].nb_meal = 0;
 		philo[i].i = i;

@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 14:54:43 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/24 16:01:15 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/24 16:19:49 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	handle_meal(void)
 			ft_kill_process(NULL);
 			printf("All philosophers ate at least %d times\n", g_data.nb_meal_needed);
 			sem_post(g_data.display);
-			break ;
+			return ;
 		}
 	}
 }
