@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 01:59:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/24 13:16:38 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/24 16:24:43 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static int	philo_hungry(t_philo *philo)
 {
-	if (g_data.nb_meal_needed == -1)
+	if (g_data.min_meal == -1)
 		return (1);
-	if (philo->nb_meal == g_data.nb_meal_needed)
+	if (philo->nb_meal == g_data.min_meal)
 		return (0);
 	return (1);
 }
@@ -43,7 +43,7 @@ void		ft_eat(t_philo *philo, int i)
 	if (g_data.nb_fed == g_data.nb_philo && g_data.simul_state == RUN)
 	{
 		g_data.simul_state = END;
-		printf("All philosophers ate at least %d times\n", g_data.nb_meal_needed);
+		printf("All philosophers ate at least %d times\n", g_data.min_meal);
 	}
 	sem_post(g_data.fork);
 }

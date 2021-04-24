@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:00:30 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/24 16:21:46 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/24 16:31:39 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	routine(t_philo *philo)
 static int	ft_launch_philo(int *pid)
 {
 	int	i;
-	
+
 	*pid = 1;
 	i = 0;
 	while (i < g_data.nb_philo && *pid > 0)
@@ -57,8 +57,8 @@ static int	ft_launch_philo(int *pid)
 
 static void	ft_wait_philo(int pid)
 {
- 	int i;
- 	int status;
+	int	i;
+	int	status;
 
 	usleep(100000);
 	i = 0;
@@ -67,14 +67,14 @@ static void	ft_wait_philo(int pid)
 		sem_post(g_data.wait_all);
 		++i;
 	}
- 	i = 0;
- 	while (i < g_data.nb_philo)
- 	{
- 		waitpid(-1, &status, 0);
+	i = 0;
+	while (i < g_data.nb_philo)
+	{
+		waitpid(-1, &status, 0);
 		exit(0);
- 		++i;
- 	}
- 	return ;
+		++i;
+	}
+	return ;
 }
 
 int			simulation(void)

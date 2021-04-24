@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:11:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/24 13:08:55 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/24 16:24:43 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef	struct	s_data
 	pthread_mutex_t	*fork;
 	pthread_mutex_t display;
 	size_t			time[3];
-	int				nb_meal_needed;
+	int				min_meal;
 	int				nb_fed;
 	int				nb_philo;
 	int				simul_state;

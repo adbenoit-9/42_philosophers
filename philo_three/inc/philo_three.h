@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 22:07:02 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/24 15:31:53 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/24 16:31:07 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@
 # define STOP 2
 
 size_t	g_start_time;
-int		test;
 
 typedef struct	s_philo
 {
@@ -57,7 +56,7 @@ typedef	struct	s_data
 	sem_t		*is_dead;
 	sem_t		*is_fed;
 	sem_t		*wait_all;
-	int			nb_meal_needed;
+	int			min_meal;
 	int			nb_fed;
 	int			nb_philo;
 	int			simul_state;
@@ -79,7 +78,6 @@ void			ft_sleep(t_philo *philo, int i);
 void			ft_isalive(t_philo *philo);
 void			handle_death(void);
 void			handle_meal(void);
-int			    ft_kill_process(char *error);
-
+int				ft_kill_process(char *error);
 
 #endif

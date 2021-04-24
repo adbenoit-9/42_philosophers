@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 14:54:43 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/24 16:19:49 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/24 16:24:43 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	handle_meal(void)
 			sem_wait(g_data.display);
 			g_data.simul_state = END;
 			ft_kill_process(NULL);
-			printf("All philosophers ate at least %d times\n", g_data.nb_meal_needed);
+			printf("All philosophers ate at least %d times\n", g_data.min_meal);
 			sem_post(g_data.display);
 			return ;
 		}

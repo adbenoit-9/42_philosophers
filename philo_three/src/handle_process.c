@@ -6,13 +6,13 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 14:39:53 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/24 16:20:09 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/24 16:28:06 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_three.h"
 
-int	    ft_kill_process(char *error)
+int	ft_kill_process(char *error)
 {
 	int i;
 
