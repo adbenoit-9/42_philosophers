@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 22:07:02 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/24 16:31:07 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/25 13:18:53 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef	struct	s_data
 	sem_t		*is_dead;
 	sem_t		*is_fed;
 	sem_t		*wait_all;
+	sem_t		*his_turn;
 	int			min_meal;
 	int			nb_fed;
 	int			nb_philo;

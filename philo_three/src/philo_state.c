@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 01:59:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/24 16:29:16 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/25 13:18:09 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 void		ft_take_forks(t_philo *philo, int i)
 {
-	if (g_data.simul_state == RUN)
-		sem_wait(g_data.fork);
+	sem_wait(g_data.his_turn);
+	sem_wait(g_data.fork);
 	philo_state(philo, i + 1, TAKE_A_FORK);
+	sem_wait(g_data.fork);
+	sem_post(g_data.his_turn);
 	philo_state(philo, i + 1, TAKE_A_FORK);
 }
 
@@ -33,6 +35,7 @@ void		ft_eat(t_philo *philo, int i)
 	++(philo->nb_meal);
 	if (g_data.simul_state != STOP && philo->nb_meal == g_data.min_meal)
 		sem_post(g_data.is_fed);
+	sem_post(g_data.fork);
 	sem_post(g_data.fork);
 }
 

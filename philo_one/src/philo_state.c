@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 01:59:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/24 16:27:14 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/25 13:16:18 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,15 @@ void		ft_eat(t_philo *philo, int i)
 	++(philo->nb_meal);
 	pthread_mutex_unlock(&g_data.fork[i]);
 	pthread_mutex_unlock(&g_data.fork[(i + 1) % g_data.nb_philo]);
+	pthread_mutex_lock(&g_data.display);
 	if (philo_hungry(philo) == 0 && philo->state != DIE)
 		++g_data.nb_fed;
 	if (g_data.nb_fed == g_data.nb_philo && g_data.simul_state == RUN)
 	{
-		pthread_mutex_lock(&g_data.display);
 		g_data.simul_state = END;
 		printf("All philosophers ate at least %d times\n", g_data.min_meal);
-		pthread_mutex_unlock(&g_data.display);
 	}
+	pthread_mutex_unlock(&g_data.display);
 }
 
 void		ft_take_forks(t_philo *philo, int i)

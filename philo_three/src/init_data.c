@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 19:58:25 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/24 16:24:43 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/25 12:48:42 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,15 @@ static int		init_sem(void)
 	sem_unlink("display");
 	sem_unlink("eat");
 	sem_unlink("dead");
-	g_data.fork = sem_open("fork", O_CREAT, 0, g_data.nb_philo / 2);
+	sem_unlink("turn");
+	g_data.fork = sem_open("fork", O_CREAT, 0, g_data.nb_philo);
 	if (!g_data.fork)
 		return (-2);
 	g_data.display = sem_open("display", O_CREAT, 0, 1);
 	g_data.wait_all = sem_open("wait", O_CREAT, 0, 0);
 	g_data.is_fed = sem_open("eat", O_CREAT, 0, 0);
 	g_data.is_dead = sem_open("dead", O_CREAT, 0, 0);
+	g_data.his_turn = sem_open("turn", O_CREAT, 0, 1);
 	if (!g_data.display)
 	{
 		sem_close(g_data.fork);

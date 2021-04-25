@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:11:16 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/24 15:59:15 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/25 13:20:54 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int			main(int ac, char **av)
 		sem_close(g_data.is_fed);
 		sem_close(g_data.is_dead);
 		sem_close(g_data.wait_all);
+		sem_close(g_data.his_turn);
 	}
 	free(g_data.philo);
 	return (0);

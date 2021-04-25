@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 01:59:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/24 16:24:43 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/25 13:16:16 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@ static int	philo_hungry(t_philo *philo)
 
 void		ft_take_forks(t_philo *philo, int i)
 {
+	sem_wait(g_data.his_turn);
 	sem_wait(g_data.fork);
 	philo_state(philo, i + 1, TAKE_A_FORK);
+	sem_wait(g_data.fork);
+	sem_post(g_data.his_turn);
 	philo_state(philo, i + 1, TAKE_A_FORK);
 }
 
@@ -38,6 +41,9 @@ void		ft_eat(t_philo *philo, int i)
 	while (current_timestamp() - start_eat < g_data.time[EAT])
 		usleep(10);
 	++(philo->nb_meal);
+	sem_post(g_data.fork);
+	sem_post(g_data.fork);
+	sem_wait(g_data.display);
 	if (philo_hungry(philo) == 0 && philo->state != DIE)
 		++g_data.nb_fed;
 	if (g_data.nb_fed == g_data.nb_philo && g_data.simul_state == RUN)
@@ -45,7 +51,7 @@ void		ft_eat(t_philo *philo, int i)
 		g_data.simul_state = END;
 		printf("All philosophers ate at least %d times\n", g_data.min_meal);
 	}
-	sem_post(g_data.fork);
+	sem_post(g_data.display);
 }
 
 void		ft_sleep(t_philo *philo, int i)
