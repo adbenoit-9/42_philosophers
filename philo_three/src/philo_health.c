@@ -14,14 +14,17 @@
 
 void	ft_isalive(t_philo *philo)
 {
-	size_t	time;
+	long int time;
 
-	time = current_timestamp();
-	while ((current_timestamp() - philo->last_meal <= g_data.time[DIE] ||
-	philo->state == EAT) && g_data.simul_state != STOP)
+	time = current_timestamp() - philo->last_meal;
+	while ((time <= (long int)g_data.time[DIE] || philo->state == EAT)
+	&& g_data.simul_state != STOP)
+	{
 		usleep(10);
-	if (philo->state == TAKE_A_FORK)
-		sem_post(g_data.fork);
+		time = current_timestamp() - philo->last_meal;
+	}
+	sem_post(g_data.fork);
+	sem_post(g_data.his_turn);
 	philo_state(philo, philo->i + 1, DIE);
 }
 

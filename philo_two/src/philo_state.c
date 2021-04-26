@@ -27,8 +27,8 @@ void		ft_take_forks(t_philo *philo, int i)
 	sem_wait(g_data.fork);
 	philo_state(philo, i + 1, TAKE_A_FORK);
 	sem_wait(g_data.fork);
-	sem_post(g_data.his_turn);
 	philo_state(philo, i + 1, TAKE_A_FORK);
+	sem_post(g_data.his_turn);
 }
 
 void		ft_eat(t_philo *philo, int i)
@@ -36,11 +36,11 @@ void		ft_eat(t_philo *philo, int i)
 	size_t	start_eat;
 
 	philo->state = EAT;
-	philo->last_meal = philo_state(philo, i + 1, EAT);
-	start_eat = philo->last_meal;
+	start_eat = philo_state(philo, i + 1, EAT);
 	while (current_timestamp() - start_eat < g_data.time[EAT])
 		usleep(10);
 	++(philo->nb_meal);
+	philo->last_meal =  current_timestamp();
 	sem_post(g_data.fork);
 	sem_post(g_data.fork);
 	sem_wait(g_data.display);

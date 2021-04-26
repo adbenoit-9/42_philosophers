@@ -32,7 +32,7 @@ OBJ				=	$(addprefix $(OBJ_PATH),$(OBJ_NAME))
 
 $(NAME) : $(OBJ)
 	@printf "\n"
-	@$(CC) $(CFLAGS) -lpthread -o $(NAME) $(OBJ)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -lpthread
 	@echo "Compilation of \033[33;1m$(NAME)\033[0;1m: [\033[1;32mOK\033[0;1m]\033[0m"
 
 all: $(NAME) 
