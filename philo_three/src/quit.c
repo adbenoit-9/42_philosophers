@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_process.c                                   :+:      :+:    :+:   */
+/*   quit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 14:39:53 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/27 14:18:26 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/27 17:26:07 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ static int	ft_kill_process(char *error)
 		++i;
 	}
 	return (0);
-} 
+}
 
-void	ft_quit_simul(int status, char *error)
+void		ft_quit(int status, char *error)
 {
 	ft_kill_process(error);
 	if (status == END)

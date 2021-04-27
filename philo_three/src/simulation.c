@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:00:30 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/27 14:14:29 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/27 16:21:37 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ static void	routine(t_philo *philo)
 
 	sem_wait(g_data.wait_all);
 	if (gettimeofday(&tv, NULL) == -1)
-		ft_quit_simul(-1, "Get Time Error.");
+		ft_quit(-1, "Get Time Error.");
 	g_start_time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
 	i = philo->i;
 	if (pthread_create(&t, NULL, (void *)ft_isalive, philo) != 0)
-		ft_quit_simul(-1, "Thread Error.");
+		ft_quit(-1, "Thread Error.");
 	while (1)
 	{
 		ft_take_forks(philo, i);
@@ -52,7 +52,7 @@ static int	ft_launch_philo(int *pid)
 	return (0);
 }
 
-static void	ft_wait_philo(int pid)
+static void	ft_wait(int pid)
 {
 	int	i;
 	int	status;
@@ -79,12 +79,12 @@ int			simulation(void)
 	pthread_t		t;
 	pthread_t		t1;
 
-	if (pthread_create(&t, NULL, (void *)handle_death, NULL) != 0)
-		ft_quit_simul(-1, "Thread Error.");
-	if (pthread_create(&t1, NULL, (void *)handle_meal, NULL) != 0)
-		ft_quit_simul(-1, "Thread Error.");
+	if (pthread_create(&t, NULL, (void *)is_someone_dead, NULL) != 0)
+		ft_quit(-1, "Thread Error.");
+	if (pthread_create(&t1, NULL, (void *)is_someone_hungry, NULL) != 0)
+		ft_quit(-1, "Thread Error.");
 	if (ft_launch_philo(&pid) == -1)
-		ft_quit_simul(-1, "Fork Error.");
-	ft_wait_philo(pid);
+		ft_quit(-1, "Fork Error.");
+	ft_wait(pid);
 	return (0);
 }

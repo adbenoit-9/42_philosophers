@@ -5,72 +5,45 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/13 01:59:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/27 13:24:34 by adbenoit         ###   ########.fr       */
+/*   Created: 2021/04/24 14:54:43 by adbenoit          #+#    #+#             */
+/*   Updated: 2021/04/27 17:43:32 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_three.h"
 
-void		ft_take_forks(t_philo *philo, int i)
+void	ft_isalive(t_philo *philo)
 {
-	sem_wait(g_data.his_turn);
-	sem_wait(g_data.fork);
-	philo_state(philo, i + 1, TAKE_A_FORK);
-	sem_wait(g_data.fork);
-	sem_post(g_data.his_turn);
-	philo_state(philo, i + 1, TAKE_A_FORK);
-}
+	long int time;
 
-void		ft_eat(t_philo *philo, int i)
-{
-	size_t	start_eat;
-
-	philo->state = EAT;
-	philo->last_meal = philo_state(philo, i + 1, EAT);
-	start_eat = philo->last_meal;
-	while (g_data.simul_state != STOP &&
-	current_timestamp() - start_eat < g_data.time[EAT])
-		usleep(10);
-	++(philo->nb_meal);
-	if (g_data.simul_state != STOP && philo->nb_meal == g_data.min_meal)
-		sem_post(g_data.is_fed);
-	sem_post(g_data.fork);
-	sem_post(g_data.fork);
-}
-
-void		ft_sleep(t_philo *philo, int i)
-{
-	size_t	time;
-
-	time = philo_state(philo, i + 1, SLEEP);
-	while (g_data.simul_state != STOP &&
-	current_timestamp() - time < g_data.time[SLEEP])
-		usleep(10);
-	philo_state(philo, i + 1, THINK);
-}
-
-size_t		philo_state(t_philo *philo, int x, int state)
-{
-	size_t	time;
-
-	sem_wait(g_data.display);
-	philo->state = state;
-	time = current_timestamp();
-	if (state == TAKE_A_FORK)
-		printf("%zums %d has taken a fork\n", time, x);
-	else if (state == EAT)
-		printf("%zums %d is eating\n", time, x);
-	else if (state == SLEEP)
-		printf("%zums %d is sleeping\n", time, x);
-	else if (state == THINK)
-		printf("%zums %d is thinking\n", time, x);
-	else if (state == DIE)
+	time = get_timestamp() - philo->last_meal;
+	while ((time < (long int)g_data.time[DIE] || philo->state == EAT)
+	&& g_data.simul_state != STOP)
 	{
-		printf("%zums %d die\n", time, x);
-		sem_post(g_data.is_dead);
-		return (0);
+		usleep(10);
+		time = get_timestamp() - philo->last_meal;
 	}
-	sem_post(g_data.display);
-	return (time);
+	g_data.simul_state = STOP;
+	display_state(philo, philo->i + 1, DIE);
+}
+
+void	is_someone_dead(void)
+{
+	sem_wait(g_data.is_dead);
+	ft_quit(STOP, NULL);
+}
+
+void	is_someone_hungry(void)
+{
+	while (1)
+	{
+		sem_wait(g_data.is_fed);
+		++g_data.nb_fed;
+		if (g_data.nb_fed == g_data.nb_philo)
+		{
+			g_data.simul_state = END;
+			ft_quit(END, NULL);
+			return ;
+		}
+	}
 }

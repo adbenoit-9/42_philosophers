@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:00:30 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/24 13:08:55 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/27 17:48:36 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,14 @@ static void	ft_isalive(t_philo *philo)
 {
 	long int time;
 
-	time = current_timestamp() - philo->last_meal;
-	while ((time <= (long int)g_data.time[DIE] || philo->state == EAT)
+	time = get_timestamp() - philo->last_meal;
+	while ((time < (long int)g_data.time[DIE] || philo->state == EAT)
 	&& g_data.simul_state != STOP)
 	{
 		usleep(10);
-		time = current_timestamp() - philo->last_meal;
+		time = get_timestamp() - philo->last_meal;
 	}
-	sem_post(g_data.fork);
-	sem_post(g_data.his_turn);
-	philo_state(philo, philo->i + 1, DIE);
+	display_state(philo, philo->i + 1, DIE);
 }
 
 static void	routine(t_philo *philo)
@@ -43,7 +41,7 @@ static void	routine(t_philo *philo)
 		ft_take_forks(philo, i);
 		ft_eat(philo, i);
 		ft_sleep(philo, i);
-		philo_state(philo, i + 1, THINK);
+		display_state(philo, i + 1, THINK);
 	}
 }
 
