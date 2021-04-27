@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 22:07:02 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/25 13:18:53 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/27 14:13:28 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,6 @@ void			ft_sleep(t_philo *philo, int i);
 void			ft_isalive(t_philo *philo);
 void			handle_death(void);
 void			handle_meal(void);
-int				ft_kill_process(char *error);
+void			ft_quit_simul(int status, char *error);
 
 #endif
