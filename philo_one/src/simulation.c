@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:00:30 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/29 01:13:49 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/29 01:18:23 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void	ft_isalive(t_philo *philo)
 
 	while (1)
 	{
+		if (end_simul() != 0)
+			return ;
 		pthread_mutex_lock(&philo->sem);
 		time = get_timestamp() - philo->last_meal;
 		pthread_mutex_unlock(&philo->sem);
