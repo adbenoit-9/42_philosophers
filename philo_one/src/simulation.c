@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:00:30 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/28 17:22:42 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/29 01:13:49 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,22 @@ static void	ft_isalive(t_philo *philo)
 {
 	long int	time;
 
-	time = get_timestamp() - philo->last_meal;
-	while ((time <= (long int)g_data.time[DIE] || philo->state == EAT)
-	&& g_data.simul_state != STOP)
+	while (1)
 	{
-		usleep(10);
+		pthread_mutex_lock(&philo->sem);
 		time = get_timestamp() - philo->last_meal;
+		pthread_mutex_unlock(&philo->sem);
+		if (time > (long int)g_data.time[DIE])
+		{
+			pthread_mutex_unlock(&g_data.fork[(philo->i + 1) % g_data.nb_philo]);
+			pthread_mutex_unlock(&g_data.fork[philo->i]);
+			pthread_mutex_lock(&philo->sem);
+			print_state(philo->i + 1, DIE);
+			pthread_mutex_unlock(&philo->sem);
+			return ;
+		}
+		usleep(10);
 	}
-	pthread_mutex_lock(&g_data.display);
-	pthread_mutex_unlock(&g_data.fork[(philo->i + 1) % g_data.nb_philo]);
-	pthread_mutex_unlock(&g_data.fork[philo->i]);
-	pthread_mutex_unlock(&g_data.display);
-	print_state(philo, philo->i + 1, DIE);
 }
 
 static void	routine(t_philo *philo)
@@ -35,19 +39,19 @@ static void	routine(t_philo *philo)
 	int			i;
 	pthread_t	t;
 
-	if (g_data.simul_state > 0)
+	if (end_simul() == 1)
 		return ;
 	i = philo->i;
 	if (pthread_create(&t, NULL, (void *)ft_isalive, philo) != 0)
 		return ((void)print_in_thread("Thread Error.\n"));
-	pthread_detach(t);
-	while (g_data.simul_state == RUN)
+	while (end_simul() == 0)
 	{
-		ft_take_forks(philo, i);
+		
+		ft_take_forks(i);
 		ft_eat(philo, i);
-		ft_sleep(philo, i);
-		print_state(philo, i + 1, THINK);
+		ft_sleep(i);
 	}
+	pthread_join(t, NULL);
 }
 
 int			simulation(void)

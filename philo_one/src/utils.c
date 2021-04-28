@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 18:04:05 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/27 17:22:50 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/29 00:00:42 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,16 @@ size_t		get_timestamp(void)
 	gettimeofday(&tv, NULL);
 	time = tv.tv_sec * 1000 + tv.tv_usec / 1000 - g_start_time;
 	return (time);
+}
+
+int			end_simul(void)
+{
+	pthread_mutex_lock(&g_data.state);
+	if (g_data.simul_state == RUN)
+	{
+		pthread_mutex_unlock(&g_data.state);
+		return (0);
+	}
+	pthread_mutex_unlock(&g_data.state);
+	return (1);
 }

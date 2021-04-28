@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:11:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/28 16:12:51 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/29 00:09:35 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,12 @@ size_t	g_start_time;
 
 typedef struct	s_philo
 {
-	pthread_t	t;
-	int			i;
-	size_t		last_meal;
-	int			nb_meal;
-	int			state;
+	pthread_t		t;
+	pthread_mutex_t	sem;
+	int				i;
+	size_t			last_meal;
+	int				nb_meal;
+	int				state;
 }				t_philo;
 
 typedef	struct	s_data
@@ -50,6 +51,9 @@ typedef	struct	s_data
 	t_philo			*philo;
 	pthread_mutex_t	*fork;
 	pthread_mutex_t display;
+	pthread_mutex_t ms;
+	pthread_mutex_t state;
+	pthread_mutex_t fed;
 	size_t			time[3];
 	int				min_meal;
 	int				nb_fed;
@@ -65,9 +69,11 @@ size_t			get_timestamp(void);
 
 int				ft_data_init(int ac, char **av);
 int				simulation(void);
-size_t			print_state(t_philo *philo, int x, int state);
+size_t			print_state(int x, int state);
 void			ft_eat(t_philo *philo, int i);
-void			ft_take_forks(t_philo *philo, int i);
-void			ft_sleep(t_philo *philo, int i);
+void			ft_take_forks(int i);
+void			ft_sleep(int i);
 int				print_in_thread(char *str);
+int				end_simul(void);
+
 #endif
