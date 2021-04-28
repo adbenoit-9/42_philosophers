@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:00:30 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/27 16:21:37 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/28 13:10:16 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	routine(t_philo *philo)
 	}
 }
 
-static int	ft_launch_philo(int *pid)
+static int	ft_philo_launch(int *pid)
 {
 	int	i;
 
@@ -52,7 +52,7 @@ static int	ft_launch_philo(int *pid)
 	return (0);
 }
 
-static void	ft_wait(int pid)
+static void	ft_philo_wait(int pid)
 {
 	int	i;
 	int	status;
@@ -83,8 +83,8 @@ int			simulation(void)
 		ft_quit(-1, "Thread Error.");
 	if (pthread_create(&t1, NULL, (void *)is_someone_hungry, NULL) != 0)
 		ft_quit(-1, "Thread Error.");
-	if (ft_launch_philo(&pid) == -1)
+	if (ft_philo_launch(&pid) == -1)
 		ft_quit(-1, "Fork Error.");
-	ft_wait(pid);
+	ft_philo_wait(pid);
 	return (0);
 }

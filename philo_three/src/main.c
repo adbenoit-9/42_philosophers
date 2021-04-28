@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:11:16 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/27 13:58:57 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/28 13:05:35 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int			main(int ac, char **av)
 {
 	int ret;
 
-	ret = init_data(ac, av);
+	ret = ft_data_init(ac, av);
 	if (ret == -1)
 		printf("Arguments error.\n");
 	else if (ret == -2)

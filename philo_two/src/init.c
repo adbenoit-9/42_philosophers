@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_data.c                                        :+:      :+:    :+:   */
+/*   init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 19:58:25 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/25 12:14:24 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/28 13:02:24 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_two.h"
 
-static t_philo	*init_philo(int n)
+static t_philo	*ft_philo_init(int n)
 {
 	t_philo	*philo;
 	int		i;
@@ -34,25 +34,20 @@ static t_philo	*init_philo(int n)
 	return (philo);
 }
 
-static int		init_sem(void)
+static int		ft_sem_init(void)
 {
 	sem_unlink("fork");
 	sem_unlink("display");
 	sem_unlink("turn");
 	g_data.fork = sem_open("fork", O_CREAT, 0, g_data.nb_philo);
-	g_data.his_turn = sem_open("turn", O_CREAT, 0, 1);
-	if (!g_data.fork)
-		return (-2);
 	g_data.display = sem_open("display", O_CREAT, 0, 1);
-	if (!g_data.display)
-	{
-		sem_close(g_data.fork);
+	g_data.his_turn = sem_open("turn", O_CREAT, 0, 1);
+	if (!g_data.fork || !g_data.display || !g_data.his_turn)
 		return (-2);
-	}
 	return (0);
 }
 
-int				init_data(int ac, char **av)
+int				ft_data_init(int ac, char **av)
 {
 	int i;
 
@@ -72,8 +67,8 @@ int				init_data(int ac, char **av)
 	g_data.time[SLEEP] = ft_atoli(av[4]);
 	if (av[5])
 		g_data.min_meal = ft_atoli(av[5]);
-	g_data.philo = init_philo(g_data.nb_philo);
+	g_data.philo = ft_philo_init(g_data.nb_philo);
 	if (!g_data.philo)
 		return (-2);
-	return (init_sem());
+	return (ft_sem_init());
 }

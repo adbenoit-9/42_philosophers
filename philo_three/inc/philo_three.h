@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 22:07:02 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/27 17:22:50 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/28 13:05:35 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int				ft_isnumber(char *str);
 long int		ft_atoli(const char *str);
 size_t			get_timestamp(void);
 
-int				init_data(int ac, char **av);
+int				ft_data_init(int ac, char **av);
 int				simulation(void);
 size_t			display_state(t_philo *philo, int x, int state);
 void			ft_eat(t_philo *philo, int i);
