@@ -40,6 +40,7 @@ static void	routine(t_philo *philo)
 	i = philo->i;
 	if (pthread_create(&t, NULL, (void *)ft_isalive, philo) != 0)
 		return ((void)print_in_thread("Thread Error.\n"));
+	pthread_detach(t);
 	while (g_data.simul_state == RUN)
 	{
 		ft_take_forks(philo, i);

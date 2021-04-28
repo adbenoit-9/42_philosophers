@@ -31,15 +31,13 @@ int			main(int ac, char **av)
 
 	ret = ft_data_init(ac, av);
 	if (ret == -1)
-		printf("Arguments error.\n");
+		write(1, "Arguments error.\n", 17);
 	else if (ret == -2)
-		printf("Malloc error.\n");
+		write(1, "Malloc error.\n", 14);
 	else
-	{
 		simulation();
-		clean_forks();
-		pthread_mutex_destroy(&g_data.display);
-	}
+	clean_forks();
+	pthread_mutex_destroy(&g_data.display);
 	free(g_data.philo);
 	return (0);
 }

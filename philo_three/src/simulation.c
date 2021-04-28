@@ -25,6 +25,7 @@ static void	routine(t_philo *philo)
 	i = philo->i;
 	if (pthread_create(&t, NULL, (void *)ft_isalive, philo) != 0)
 		ft_quit(-1, "Thread Error.");
+	pthread_detach(t);
 	while (1)
 	{
 		ft_take_forks(philo, i);
@@ -81,8 +82,10 @@ int			simulation(void)
 
 	if (pthread_create(&t, NULL, (void *)is_someone_dead, NULL) != 0)
 		ft_quit(-1, "Thread Error.");
+	pthread_detach(t);
 	if (pthread_create(&t1, NULL, (void *)is_someone_hungry, NULL) != 0)
 		ft_quit(-1, "Thread Error.");
+	pthread_detach(t1);
 	if (ft_philo_launch(&pid) == -1)
 		ft_quit(-1, "Fork Error.");
 	ft_philo_wait(pid);
