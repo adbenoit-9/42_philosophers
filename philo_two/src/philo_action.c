@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 17:24:31 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/28 13:46:26 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/28 16:12:51 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void		ft_take_forks(t_philo *philo, int i)
 {
 	sem_wait(g_data.his_turn);
 	sem_wait(g_data.fork);
-	display_state(philo, i + 1, TAKE_A_FORK);
+	print_state(philo, i + 1, TAKE_A_FORK);
 	sem_wait(g_data.fork);
-	display_state(philo, i + 1, TAKE_A_FORK);
+	print_state(philo, i + 1, TAKE_A_FORK);
 	sem_post(g_data.his_turn);
 }
 
@@ -36,7 +36,7 @@ void		ft_eat(t_philo *philo, int i)
 	size_t	start_eat;
 
 	philo->state = EAT;
-	start_eat = display_state(philo, i + 1, EAT);
+	start_eat = print_state(philo, i + 1, EAT);
 	philo->last_meal = get_timestamp();
 	while (g_data.simul_state == RUN &&
 	get_timestamp() - start_eat < g_data.time[EAT])
@@ -59,9 +59,9 @@ void		ft_sleep(t_philo *philo, int i)
 {
 	size_t	time;
 
-	time = display_state(philo, i + 1, SLEEP);
+	time = print_state(philo, i + 1, SLEEP);
 	while (g_data.simul_state == RUN &&
 	get_timestamp() - time < g_data.time[SLEEP])
 		usleep(10);
-	display_state(philo, i + 1, THINK);
+	print_state(philo, i + 1, THINK);
 }

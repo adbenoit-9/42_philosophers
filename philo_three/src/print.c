@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_state.c                                    :+:      :+:    :+:   */
+/*   print_state.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/27 16:08:46 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/27 17:22:50 by adbenoit         ###   ########.fr       */
+/*   Created: 2021/04/27 16:09:49 by adbenoit          #+#    #+#             */
+/*   Updated: 2021/04/28 16:08:49 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_one.h"
+#include "philo_three.h"
 
-size_t		display_state(t_philo *philo, int x, int state)
+size_t		print_state(t_philo *philo, int x, int state)
 {
 	size_t	time;
 
-	pthread_mutex_lock(&g_data.display);
-	if (g_data.simul_state != RUN)
-	{
-		pthread_mutex_unlock(&g_data.display);
-		return (0);
-	}
+	sem_wait(g_data.display);
 	philo->state = state;
 	time = get_timestamp();
 	if (state == TAKE_A_FORK)
@@ -35,8 +30,17 @@ size_t		display_state(t_philo *philo, int x, int state)
 	else if (state == DIE)
 	{
 		printf("%zums %d die\n", time, x);
-		g_data.simul_state = STOP;
+		sem_post(g_data.is_dead);
+		return (0);
 	}
-	pthread_mutex_unlock(&g_data.display);
+	sem_post(g_data.display);
 	return (time);
+}
+
+int		print_in_thread(char *str)
+{
+	sem_wait(g_data.display);
+	printf("%s", str);
+	sem_post(g_data.display);
+	return (0);
 }
