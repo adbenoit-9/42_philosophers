@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 14:54:43 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/27 17:43:32 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/28 13:43:41 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_isalive(t_philo *philo)
 
 	time = get_timestamp() - philo->last_meal;
 	while ((time < (long int)g_data.time[DIE] || philo->state == EAT)
-	&& g_data.simul_state != STOP)
+	&& g_data.simul_state == RUN)
 	{
 		usleep(10);
 		time = get_timestamp() - philo->last_meal;

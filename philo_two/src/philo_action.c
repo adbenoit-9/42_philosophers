@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 17:24:31 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/27 18:13:38 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/28 13:46:26 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void		ft_eat(t_philo *philo, int i)
 	philo->state = EAT;
 	start_eat = display_state(philo, i + 1, EAT);
 	philo->last_meal = get_timestamp();
-	while (get_timestamp() - start_eat < g_data.time[EAT])
+	while (g_data.simul_state == RUN &&
+	get_timestamp() - start_eat < g_data.time[EAT])
 		usleep(10);
 	++(philo->nb_meal);
 	sem_post(g_data.fork);
@@ -59,7 +60,8 @@ void		ft_sleep(t_philo *philo, int i)
 	size_t	time;
 
 	time = display_state(philo, i + 1, SLEEP);
-	while (get_timestamp() - time < g_data.time[SLEEP])
+	while (g_data.simul_state == RUN &&
+	get_timestamp() - time < g_data.time[SLEEP])
 		usleep(10);
 	display_state(philo, i + 1, THINK);
 }

@@ -6,13 +6,13 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:11:16 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/28 13:36:44 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/28 13:47:58 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_two.h"
 
-void	ft_sem_clean(void)
+static void	ft_sem_clean(void)
 {
 	sem_unlink("fork");
 	sem_unlink("display");
