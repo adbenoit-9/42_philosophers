@@ -6,7 +6,7 @@
 #    By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/06 17:11:11 by adbenoit          #+#    #+#              #
-#    Updated: 2021/04/28 13:57:26 by adbenoit         ###   ########.fr        #
+#    Updated: 2021/04/28 13:59:53 by adbenoit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ HEADER			=	$(INC)philo_one.h
 
 SRC_PATH		=	src/
 
-SRC				=	main.c		init.c		display_state.c \
+SRC				=	main.c		init.c			display_state.c \
 					utils.c		simulation.c	philo_action.c
 
 CC				=	gcc
