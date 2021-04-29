@@ -30,7 +30,7 @@ static t_philo	*ft_philo_init(int n)
 		philo[i].nb_meal = 0;
 		philo[i].i = i;
 		philo[i].last_meal = 0;
-		philo[i].sem = sem_open("sem", O_CREAT, 0, 1);
+		philo[i].sem = sem_open("sem", O_CREAT, S_IRWXU, 1);
 		++i;
 	}
 	return (philo);
@@ -43,11 +43,11 @@ static int		ft_sem_init(void)
 	sem_unlink("turn");
 	sem_unlink("state");
 	sem_unlink("fed");
-	g_data.fork = sem_open("fork", O_CREAT, 0, g_data.nb_philo);
-	g_data.display = sem_open("display", O_CREAT, 0, 1);
-	g_data.his_turn = sem_open("turn", O_CREAT, 0, 1);
-	g_data.state = sem_open("state", O_CREAT, 0, 1);
-	g_data.fed = sem_open("fed", O_CREAT, 0, 1);
+	g_data.fork = sem_open("fork", O_CREAT, S_IRWXU, g_data.nb_philo);
+	g_data.display = sem_open("display", O_CREAT, S_IRWXU, 1);
+	g_data.his_turn = sem_open("turn", O_CREAT, S_IRWXU, 1);
+	g_data.state = sem_open("state", O_CREAT, S_IRWXU, 1);
+	g_data.fed = sem_open("fed", O_CREAT, S_IRWXU, 1);
 	if (!g_data.fork || !g_data.display || !g_data.his_turn
 	|| !g_data.state || !g_data.fed)
 		return (-2);
