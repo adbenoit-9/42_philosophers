@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:11:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/29 12:01:54 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/29 17:32:20 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ void			ft_take_forks(int i);
 void			ft_sleep(int i);
 int				print_in_thread(char *str);
 int				end_simul(void);
+char			*ft_itoa(int n);
 
 #endif
