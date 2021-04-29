@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 18:04:05 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/29 17:31:58 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/29 17:38:07 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,13 @@ static size_t	ft_size(int n)
 
 char			*ft_itoa(int n)
 {
-	char	*nb;
+	char	nb[10];
 	size_t	neg;
 	size_t	size;
 	size_t	num;
 
 	size = ft_size(n);
 	neg = 0;
-	if (!(nb = malloc(sizeof(char) * (size + 1))))
-		return (0);
 	if (n < 0)
 	{
 		nb[0] = '-';
