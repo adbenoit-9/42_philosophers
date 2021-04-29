@@ -6,7 +6,7 @@
 #    By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/06 17:11:11 by adbenoit          #+#    #+#              #
-#    Updated: 2021/04/28 17:17:20 by adbenoit         ###   ########.fr        #
+#    Updated: 2021/04/29 15:34:04 by adbenoit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRC				=	main.c		init.c			print.c \
 					utils.c		simulation.c	philo_action.c
 
 CC				=	gcc
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-Wall -Wextra -Werror -g -fsanitize=thread
 
 OBJ_PATH		=	obj/
 

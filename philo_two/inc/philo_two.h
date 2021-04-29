@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:11:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/28 17:19:25 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/29 12:01:54 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ size_t	g_start_time;
 typedef struct	s_philo
 {
 	pthread_t	t;
+	sem_t		*sem;
 	int			i;
 	size_t		last_meal;
 	int			nb_meal;
@@ -51,6 +52,8 @@ typedef	struct	s_data
 	sem_t		*fork;
 	sem_t		*display;
 	sem_t		*his_turn;
+	sem_t		*state;
+	sem_t		*fed;
 	int			min_meal;
 	int			nb_fed;
 	int			nb_philo;
@@ -66,10 +69,11 @@ size_t			get_timestamp(void);
 
 int				ft_data_init(int ac, char **av);
 int				simulation(void);
-size_t			print_state(t_philo *philo, int x, int state);
+size_t			print_state(int x, int state);
 void			ft_eat(t_philo *philo, int i);
-void			ft_take_forks(t_philo *philo, int i);
-void			ft_sleep(t_philo *philo, int i);
+void			ft_take_forks(int i);
+void			ft_sleep(int i);
 int				print_in_thread(char *str);
+int				end_simul(void);
 
 #endif

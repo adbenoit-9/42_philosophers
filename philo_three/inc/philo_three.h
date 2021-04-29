@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 22:07:02 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/28 17:19:36 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/29 16:18:32 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ size_t	g_start_time;
 typedef struct	s_philo
 {
 	pid_t	pid;
+	sem_t	*sem;
 	int		i;
 	size_t	last_meal;
 	int		nb_meal;

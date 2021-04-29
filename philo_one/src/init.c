@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:58:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/29 00:05:50 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/29 11:49:26 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ int				ft_data_init(int ac, char **av)
 	if (!g_data.philo)
 		return (-2);
 	pthread_mutex_init(&g_data.display, NULL);
-	pthread_mutex_init(&g_data.ms, NULL);
 	pthread_mutex_init(&g_data.state, NULL);
 	pthread_mutex_init(&g_data.fed, NULL);
 	return (ft_forks_init());

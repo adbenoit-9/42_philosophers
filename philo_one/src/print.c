@@ -33,10 +33,10 @@ size_t		print_state(int x, int state)
 		printf("%zums %d is thinking\n", time, x);
 	else if (state == DIE)
 	{
-		printf("%zums %d die\n", time, x);
 		pthread_mutex_lock(&g_data.state);
 		g_data.simul_state = STOP;
 		pthread_mutex_unlock(&g_data.state);
+		printf("%zums %d die\n", time, x);
 	}
 	pthread_mutex_unlock(&g_data.display);
 	return (time);

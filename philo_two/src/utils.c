@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 18:04:05 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/27 17:22:50 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/29 12:42:30 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,18 @@ size_t			get_timestamp(void)
 	gettimeofday(&tv, NULL);
 	time = tv.tv_sec * 1000 + tv.tv_usec / 1000 - g_start_time;
 	return (time);
+}
+
+
+int			end_simul(void)
+{
+	int ret;
+
+	sem_wait(g_data.state);
+	if (g_data.simul_state == RUN)
+		ret = 0;
+	else
+		ret = 1;
+	sem_post(g_data.state);	
+	return (ret);
 }

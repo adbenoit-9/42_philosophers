@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:11:16 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/29 01:13:55 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/29 11:49:34 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int			main(int ac, char **av)
 		simulation();
 	clean_forks();
 	pthread_mutex_destroy(&g_data.display);
-	pthread_mutex_destroy(&g_data.ms);
 	pthread_mutex_destroy(&g_data.state);
 	pthread_mutex_destroy(&g_data.fed);
 	free(g_data.philo);
