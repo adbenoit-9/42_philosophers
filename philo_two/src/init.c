@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:58:38 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/29 17:33:42 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/29 17:41:23 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static t_philo	*ft_philo_init(int n)
 		name = ft_itoa(i);
 		sem_unlink(name);
 		philo[i].sem = sem_open(name, O_CREAT, S_IRWXU, 1);
+		free(name);
 		++i;
 	}
 	return (philo);
