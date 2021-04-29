@@ -22,7 +22,7 @@ SRC				=	main.c		init.c			print.c \
 					utils.c		simulation.c	philo_action.c
 
 CC				=	gcc
-CFLAGS			=	-Wall -Wextra -Werror #-g -fsanitize=thread
+CFLAGS			=	-Wall -Wextra -Werror -g #-fsanitize=thread
 
 OBJ_PATH		=	obj/
 
