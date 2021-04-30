@@ -6,7 +6,7 @@
 #    By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/06 17:11:11 by adbenoit          #+#    #+#              #
-#    Updated: 2021/04/29 14:41:31 by adbenoit         ###   ########.fr        #
+#    Updated: 2021/04/30 15:39:07 by adbenoit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRC				=	main.c		init.c			print.c \
 					utils.c		simulation.c	philo_action.c
 
 CC				=	gcc
-CFLAGS			=	-Wall -Wextra -Werror #-g -fsanitize=thread
+CFLAGS			=	-Wall -Wextra -Werror -g -fsanitize=thread
 
 OBJ_PATH		=	obj/
 
@@ -57,7 +57,7 @@ FILE=norme_error.txt
 ERROR= `cat $(FILE) | grep -B 1 "Error"`
 norme:
 	@printf "\033[33mLaunching ...\033[0m"
-	@ruby ~/.norminette/norminette.rb */*/*c */*c */*h > $(FILE)
+	@norminette */*/*c */*c */*h > $(FILE)
 	@printf "\rNorme of \033[33;1m$(NAME)\033[0;1m: [\033[1;32mOK\033[0;1m]\033[0m"
 	@echo "\r$(ERROR)"
 	@rm $(FILE)

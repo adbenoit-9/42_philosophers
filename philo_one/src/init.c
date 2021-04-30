@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:58:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/29 11:49:26 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/30 15:46:52 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,15 @@ static t_philo	*ft_philo_init(int n)
 	i = 0;
 	while (i < n)
 	{
-		philo[i].state = -1;
 		philo[i].nb_meal = 0;
 		philo[i].i = i;
 		philo[i].last_meal = 0;
-		pthread_mutex_init(&philo[i].sem, NULL);
 		++i;
 	}
 	return (philo);
 }
 
-static int		ft_forks_init(void)
+static int		ft_mutex_init(void)
 {
 	int	i;
 
@@ -46,8 +44,12 @@ static int		ft_forks_init(void)
 	while (i < g_data.nb_philo)
 	{
 		pthread_mutex_init(&g_data.fork[i], NULL);
+		pthread_mutex_init(&g_data.philo[i].mutex, NULL);
 		++i;
 	}
+	pthread_mutex_init(&g_data.display, NULL);
+	pthread_mutex_init(&g_data.state, NULL);
+	pthread_mutex_init(&g_data.fed, NULL);
 	return (0);
 }
 
@@ -66,17 +68,14 @@ int				ft_data_init(int ac, char **av)
 		return (-1);
 	g_data.simul_state = RUN;
 	g_data.nb_philo = ft_atoli(av[1]);
-	g_data.min_meal = -1;
+	g_data.nb_meal_min = -1;
 	g_data.time[DIE] = ft_atoli(av[2]);
 	g_data.time[EAT] = ft_atoli(av[3]);
 	g_data.time[SLEEP] = ft_atoli(av[4]);
 	if (av[5])
-		g_data.min_meal = ft_atoli(av[5]);
+		g_data.nb_meal_min = ft_atoli(av[5]);
 	g_data.philo = ft_philo_init(g_data.nb_philo);
 	if (!g_data.philo)
 		return (-2);
-	pthread_mutex_init(&g_data.display, NULL);
-	pthread_mutex_init(&g_data.state, NULL);
-	pthread_mutex_init(&g_data.fed, NULL);
-	return (ft_forks_init());
+	return (ft_mutex_init());
 }

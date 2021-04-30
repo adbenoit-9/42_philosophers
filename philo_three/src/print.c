@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_state.c                                    :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/27 16:09:49 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/28 16:08:49 by adbenoit         ###   ########.fr       */
+/*   Created: 2021/04/30 17:00:28 by adbenoit          #+#    #+#             */
+/*   Updated: 2021/04/30 17:00:28 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_three.h"
 
-size_t		print_state(int x, int state)
+size_t	print_state(int x, int state)
 {
 	size_t	time;
 

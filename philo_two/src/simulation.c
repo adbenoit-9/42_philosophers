@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:00:30 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/29 14:12:35 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/30 16:44:59 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ static void	ft_isalive(t_philo *philo)
 		{
 			sem_post(g_data.fork);
 			sem_post(g_data.his_turn);
-			sem_wait(philo->sem);
 			print_state(philo->i + 1, DIE);
-			sem_post(philo->sem);
 			return ;
 		}
 		usleep(10);
@@ -78,4 +76,18 @@ int			simulation(void)
 		++i;
 	}
 	return (0);
+}
+
+
+int			end_simul(void)
+{
+	int ret;
+
+	sem_wait(g_data.state);
+	if (g_data.simul_state == RUN)
+		ret = 0;
+	else
+		ret = 1;
+	sem_post(g_data.state);	
+	return (ret);
 }

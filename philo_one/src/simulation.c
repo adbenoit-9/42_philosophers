@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:00:30 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/29 01:18:23 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/30 15:36:55 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,15 @@ static void	ft_isalive(t_philo *philo)
 	{
 		if (end_simul() != 0)
 			return ;
-		pthread_mutex_lock(&philo->sem);
+		pthread_mutex_lock(&philo->mutex);
 		time = get_timestamp() - philo->last_meal;
-		pthread_mutex_unlock(&philo->sem);
+		pthread_mutex_unlock(&philo->mutex);
 		if (time > (long int)g_data.time[DIE])
 		{
-			pthread_mutex_unlock(&g_data.fork[(philo->i + 1) % g_data.nb_philo]);
+			pthread_mutex_unlock(&g_data.fork[(philo->i + 1) %
+			g_data.nb_philo]);
 			pthread_mutex_unlock(&g_data.fork[philo->i]);
-			pthread_mutex_lock(&philo->sem);
 			print_state(philo->i + 1, DIE);
-			pthread_mutex_unlock(&philo->sem);
 			return ;
 		}
 		usleep(10);
@@ -38,20 +37,17 @@ static void	ft_isalive(t_philo *philo)
 
 static void	routine(t_philo *philo)
 {
-	int			i;
 	pthread_t	t;
 
 	if (end_simul() == 1)
 		return ;
-	i = philo->i;
 	if (pthread_create(&t, NULL, (void *)ft_isalive, philo) != 0)
 		return ((void)print_in_thread("Thread Error.\n"));
 	while (end_simul() == 0)
 	{
-		
-		ft_take_forks(i);
-		ft_eat(philo, i);
-		ft_sleep(i);
+		ft_take_forks(philo->i);
+		ft_eat(philo, philo->i);
+		ft_sleep(philo->i);
 	}
 	pthread_join(t, NULL);
 }
@@ -79,4 +75,16 @@ int			simulation(void)
 		++i;
 	}
 	return (0);
+}
+
+int			end_simul(void)
+{
+	pthread_mutex_lock(&g_data.state);
+	if (g_data.simul_state == RUN)
+	{
+		pthread_mutex_unlock(&g_data.state);
+		return (0);
+	}
+	pthread_mutex_unlock(&g_data.state);
+	return (1);
 }

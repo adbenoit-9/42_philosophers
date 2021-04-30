@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:11:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/29 17:32:20 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/30 15:49:09 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ typedef struct	s_philo
 	int			i;
 	size_t		last_meal;
 	int			nb_meal;
-	int			state;
 }				t_philo;
 
 typedef	struct	s_data
@@ -54,7 +53,7 @@ typedef	struct	s_data
 	sem_t		*his_turn;
 	sem_t		*state;
 	sem_t		*fed;
-	int			min_meal;
+	int			nb_meal_min;
 	int			nb_fed;
 	int			nb_philo;
 	int			simul_state;

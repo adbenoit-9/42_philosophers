@@ -6,7 +6,7 @@
 #    By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/06 17:11:11 by adbenoit          #+#    #+#              #
-#    Updated: 2021/04/30 13:14:21 by adbenoit         ###   ########.fr        #
+#    Updated: 2021/04/30 17:01:09 by adbenoit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ OBJ				=	$(addprefix $(OBJ_PATH),$(OBJ_NAME))
 
 $(NAME) : $(OBJ)
 	@printf "\n"
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -lpthread
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -pthread
 	@echo "Compilation of \033[33;1m$(NAME)\033[0;1m: [\033[1;32mOK\033[0;1m]\033[0m"
 
 all: $(NAME) 
@@ -57,7 +57,7 @@ FILE=norme_error.txt
 ERROR= `cat $(FILE) | grep -B 1 "Error"`
 norme:
 	@printf "\033[33mLaunching ...\033[0m"
-	@ruby ~/.norminette/norminette.rb */*/*c */*c */*h > $(FILE)
+	@norminette */*/*c */*c */*h > $(FILE)
 	@printf "\rNorme of \033[33;1m$(NAME)\033[0;1m: [\033[1;32mOK\033[0;1m]\033[0m"
 	@echo "\r$(ERROR)"
 	@rm $(FILE)

@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:00:30 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/30 14:47:18 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/30 16:56:24 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ static void	ft_philo_wait(int pid)
 {
 	int	i;
 	int	status;
-
 
 	usleep(100000);
 	i = 0;

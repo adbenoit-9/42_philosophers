@@ -33,10 +33,10 @@ size_t		print_state(int x, int state)
 		printf("%zums %d is thinking\n", time, x);
 	else if (state == DIE)
 	{
-		printf("%zums %d die\n", time, x);
 		sem_wait(g_data.state);
 		g_data.simul_state = STOP;
 		sem_post(g_data.state);
+		printf("%zums %d die\n", time, x);
 	}
 	sem_post(g_data.display);
 	return (time);

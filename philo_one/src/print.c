@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_state.c                                    :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/27 16:08:46 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/28 16:11:27 by adbenoit         ###   ########.fr       */
+/*   Created: 2021/04/30 15:39:28 by adbenoit          #+#    #+#             */
+/*   Updated: 2021/04/30 15:44:56 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-size_t		print_state(int x, int state)
+size_t	print_state(int x, int state)
 {
 	size_t	time;
 
 	pthread_mutex_lock(&g_data.display);
 	if (end_simul() == 1)
-	{
-		pthread_mutex_unlock(&g_data.display);
-		return (0);
-	}
+		return (pthread_mutex_unlock(&g_data.display));
 	time = get_timestamp();
 	if (state == TAKE_A_FORK)
 		printf("%zums %d has taken a fork\n", time, x);

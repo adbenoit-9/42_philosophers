@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:58:38 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/29 17:41:23 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/30 15:58:34 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static t_philo	*ft_philo_init(int n)
 	i = 0;
 	while (i < n)
 	{
-		philo[i].state = -1;
 		philo[i].nb_meal = 0;
 		philo[i].i = i;
 		philo[i].last_meal = 0;
@@ -34,6 +33,8 @@ static t_philo	*ft_philo_init(int n)
 		sem_unlink(name);
 		philo[i].sem = sem_open(name, O_CREAT, S_IRWXU, 1);
 		free(name);
+		if (!philo[i].sem)
+			return (NULL);
 		++i;
 	}
 	return (philo);
@@ -71,12 +72,12 @@ int				ft_data_init(int ac, char **av)
 		return (-1);
 	g_data.simul_state = RUN;
 	g_data.nb_philo = ft_atoli(av[1]);
-	g_data.min_meal = -1;
+	g_data.nb_meal_min = -1;
 	g_data.time[DIE] = ft_atoli(av[2]);
 	g_data.time[EAT] = ft_atoli(av[3]);
 	g_data.time[SLEEP] = ft_atoli(av[4]);
 	if (av[5])
-		g_data.min_meal = ft_atoli(av[5]);
+		g_data.nb_meal_min = ft_atoli(av[5]);
 	g_data.philo = ft_philo_init(g_data.nb_philo);
 	if (!g_data.philo)
 		return (-2);
