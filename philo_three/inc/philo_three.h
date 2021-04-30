@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 22:07:02 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/29 16:18:32 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/30 14:28:36 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,14 @@ size_t			get_timestamp(void);
 
 int				ft_data_init(int ac, char **av);
 int				simulation(void);
-size_t			print_state(t_philo *philo, int x, int state);
+size_t			print_state(int x, int state);
 void			ft_eat(t_philo *philo, int i);
-void			ft_take_forks(t_philo *philo, int i);
-void			ft_sleep(t_philo *philo, int i);
+void			ft_take_forks(int i);
+void			ft_sleep(int i);
 void			ft_isalive(t_philo *philo);
 void			is_someone_dead(void);
 void			is_someone_hungry(void);
 void			ft_quit(int status, char *error);
 int				print_in_thread(char *str);
+char			*ft_itoa(int n);
 #endif

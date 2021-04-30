@@ -12,12 +12,11 @@
 
 #include "philo_three.h"
 
-size_t		print_state(t_philo *philo, int x, int state)
+size_t		print_state(int x, int state)
 {
 	size_t	time;
 
 	sem_wait(g_data.display);
-	philo->state = state;
 	time = get_timestamp();
 	if (state == TAKE_A_FORK)
 		printf("%zums %d has taken a fork\n", time, x);

@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:58:49 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/29 16:22:02 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/30 14:47:25 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static t_philo	*ft_philo_init(int n)
 {
 	t_philo	*philo;
 	int		i;
+	char	*name;
 
 	if (n == 0)
 		return (NULL);
@@ -23,7 +24,6 @@ static t_philo	*ft_philo_init(int n)
 	if (!philo)
 		return (NULL);
 	i = 0;
-	sem_unlink("sem");
 	while (i < n)
 	{
 		philo[i].i = i;
@@ -31,7 +31,10 @@ static t_philo	*ft_philo_init(int n)
 		philo[i].nb_meal = 0;
 		philo[i].last_meal = 0;
 		philo[i].pid = 0;
-		philo[i].sem = sem_open("sem", O_CREAT, 0, 1);
+		name = ft_itoa(i);
+		sem_unlink(name);
+		philo[i].sem = sem_open(name, O_CREAT, S_IRWXU, 1);
+		free(name);
 		++i;
 	}
 	return (philo);

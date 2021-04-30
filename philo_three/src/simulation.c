@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:00:30 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/28 13:10:16 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/30 14:47:18 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,11 @@ static void	routine(t_philo *philo)
 	i = philo->i;
 	if (pthread_create(&t, NULL, (void *)ft_isalive, philo) != 0)
 		ft_quit(-1, "Thread Error.");
-	pthread_detach(t);
 	while (1)
 	{
-		ft_take_forks(philo, i);
+		ft_take_forks(i);
 		ft_eat(philo, i);
-		ft_sleep(philo, i);
+		ft_sleep(i);
 	}
 }
 
@@ -58,6 +57,7 @@ static void	ft_philo_wait(int pid)
 	int	i;
 	int	status;
 
+
 	usleep(100000);
 	i = 0;
 	while (i < g_data.nb_philo && pid > 0)
@@ -80,14 +80,15 @@ int			simulation(void)
 	pthread_t		t;
 	pthread_t		t1;
 
-	if (pthread_create(&t, NULL, (void *)is_someone_dead, NULL) != 0)
-		ft_quit(-1, "Thread Error.");
-	pthread_detach(t);
-	if (pthread_create(&t1, NULL, (void *)is_someone_hungry, NULL) != 0)
-		ft_quit(-1, "Thread Error.");
-	pthread_detach(t1);
 	if (ft_philo_launch(&pid) == -1)
 		ft_quit(-1, "Fork Error.");
+	if (pid > 0)
+	{
+		if (pthread_create(&t, NULL, (void *)is_someone_dead, NULL) != 0)
+			ft_quit(-1, "Thread Error.");
+		if (pthread_create(&t1, NULL, (void *)is_someone_hungry, NULL) != 0)
+			ft_quit(-1, "Thread Error.");
+	}
 	ft_philo_wait(pid);
 	return (0);
 }

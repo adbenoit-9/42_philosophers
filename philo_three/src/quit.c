@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 14:39:53 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/29 16:22:31 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/04/30 14:28:28 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,6 @@ static int	ft_kill_process(char *error)
 
 static void	ft_sem_clean(void)
 {
-	sem_unlink("wait");
-	sem_unlink("fork");
-	sem_unlink("display");
-	sem_unlink("eat");
-	sem_unlink("dead");
-	sem_unlink("turn");
-	sem_unlink("sem");
 	sem_close(g_data.fork);
 	sem_close(g_data.display);
 	sem_close(g_data.is_fed);
