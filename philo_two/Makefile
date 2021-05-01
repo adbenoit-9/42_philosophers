@@ -6,7 +6,7 @@
 #    By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/06 17:11:11 by adbenoit          #+#    #+#              #
-#    Updated: 2021/04/30 17:01:09 by adbenoit         ###   ########.fr        #
+#    Updated: 2021/05/01 21:45:59 by adbenoit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRC				=	main.c		init.c			print.c \
 					utils.c		simulation.c	philo_action.c
 
 CC				=	gcc
-CFLAGS			=	-Wall -Wextra -Werror -g -fsanitize=thread
+CFLAGS			=	-Wall -Wextra -Werror
 
 OBJ_PATH		=	obj/
 
@@ -59,7 +59,7 @@ norme:
 	@printf "\033[33mLaunching ...\033[0m"
 	@norminette */*/*c */*c */*h > $(FILE)
 	@printf "\rNorme of \033[33;1m$(NAME)\033[0;1m: [\033[1;32mOK\033[0;1m]\033[0m"
-	@echo "\r$(ERROR)"
+	@echo "$(ERROR)"
 	@rm $(FILE)
 	
 
