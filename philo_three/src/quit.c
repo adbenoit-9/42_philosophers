@@ -6,22 +6,16 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 17:00:15 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/30 17:00:16 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/05/01 22:07:15 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_three.h"
 
-static int	ft_kill_process(char *error)
+static int	ft_kill_process(void)
 {
 	int i;
 
-	if (error)
-	{
-		sem_wait(g_data.display);
-		printf("%s\n", error);
-		sem_wait(g_data.display);
-	}
 	i = 0;
 	while (i < g_data.nb_philo)
 	{
@@ -52,7 +46,9 @@ static void	ft_sem_clean(void)
 
 void		ft_quit(int status, char *error)
 {
-	ft_kill_process(error);
+	if (error)
+		print_in_thread(error);
+	ft_kill_process();
 	if (status == END)
 		printf("All philosophers ate at least %d times\n", g_data.nb_meal_min);
 	ft_sem_clean();

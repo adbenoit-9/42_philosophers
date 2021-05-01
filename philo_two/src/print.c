@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 21:27:56 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/05/01 21:28:24 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/05/01 22:01:48 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	print_state(int x, int state)
 	size_t	time;
 
 	sem_wait(g_data.display);
-	if (end_simul() == 1)
+	if (ft_stop() == 1)
 		return (sem_post(g_data.display));
 	time = get_timestamp();
 	if (state == TAKE_A_FORK)

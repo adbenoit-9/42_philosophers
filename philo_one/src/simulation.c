@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:00:30 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/30 15:36:55 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/05/01 22:01:48 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	ft_isalive(t_philo *philo)
 
 	while (1)
 	{
-		if (end_simul() != 0)
+		if (ft_stop() != 0)
 			return ;
 		pthread_mutex_lock(&philo->mutex);
 		time = get_timestamp() - philo->last_meal;
@@ -39,11 +39,11 @@ static void	routine(t_philo *philo)
 {
 	pthread_t	t;
 
-	if (end_simul() == 1)
+	if (ft_stop() == 1)
 		return ;
 	if (pthread_create(&t, NULL, (void *)ft_isalive, philo) != 0)
 		return ((void)print_in_thread("Thread Error.\n"));
-	while (end_simul() == 0)
+	while (ft_stop() == 0)
 	{
 		ft_take_forks(philo->i);
 		ft_eat(philo, philo->i);
@@ -77,7 +77,7 @@ int			simulation(void)
 	return (0);
 }
 
-int			end_simul(void)
+int			ft_stop(void)
 {
 	pthread_mutex_lock(&g_data.state);
 	if (g_data.simul_state == RUN)

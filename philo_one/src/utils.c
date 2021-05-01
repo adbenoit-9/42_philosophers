@@ -6,18 +6,22 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 18:04:05 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/30 15:36:46 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/05/01 22:30:19 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-static int	ft_isdigit(int c)
+size_t		ft_strlen(char *str)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	else
+	size_t	len;
+
+	if (!str)
 		return (0);
+	len = 0;
+	while (str[len])
+		++len;
+	return (len);
 }
 
 long int	ft_atoli(const char *str)
@@ -52,7 +56,7 @@ int			ft_isnumber(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (ft_isdigit(str[i]) == 0)
+		if (str[i] < '0' || str[i] > '9')
 			return (0);
 		++i;
 	}

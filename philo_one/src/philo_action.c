@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 17:23:38 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/30 15:30:23 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/05/01 22:01:48 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void		ft_eat(t_philo *philo, int i)
 	pthread_mutex_lock(&g_data.fed);
 	if (philo_hungry(philo) == 0)
 		++g_data.nb_fed;
-	if (g_data.nb_fed == g_data.nb_philo && end_simul() == 0)
+	if (g_data.nb_fed == g_data.nb_philo && ft_stop() == 0)
 	{
 		pthread_mutex_lock(&g_data.state);
 		g_data.simul_state = STOP;

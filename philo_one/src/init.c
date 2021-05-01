@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:58:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/30 15:46:52 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/05/01 22:24:16 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ int				ft_data_init(int ac, char **av)
 	i = 1;
 	while (av[i] && ft_isnumber(av[i]) == 1)
 		++i;
-	if (i != ac)
+	if (i != ac || ft_strlen(av[1]) > 18 || ft_strlen(av[2]) > 18 ||
+	ft_strlen(av[3]) > 18 || ft_strlen(av[4]) > 18 || ft_strlen(av[5]) > 18)
 		return (-1);
 	g_data.simul_state = RUN;
 	g_data.nb_philo = ft_atoli(av[1]);

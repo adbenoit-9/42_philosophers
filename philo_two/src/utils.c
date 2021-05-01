@@ -6,21 +6,25 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 18:04:05 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/30 16:44:54 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/05/01 22:30:39 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_two.h"
 
-static int		ft_isdigit(int c)
+size_t		ft_strlen(char *str)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	else
+	size_t	len;
+
+	if (!str)
 		return (0);
+	len = 0;
+	while (str[len])
+		++len;
+	return (len);
 }
 
-long int		ft_atoli(const char *str)
+long int	ft_atoli(const char *str)
 {
 	int			i;
 	long int	num;
@@ -45,21 +49,21 @@ long int		ft_atoli(const char *str)
 	return (num);
 }
 
-int				ft_isnumber(char *str)
+int			ft_isnumber(char *str)
 {
 	int i;
 
 	i = 0;
 	while (str[i])
 	{
-		if (ft_isdigit(str[i]) == 0)
+		if (str[i] < '0' || str[i] > '9')
 			return (0);
 		++i;
 	}
 	return (1);
 }
 
-char			*ft_itoa(int n)
+char		*ft_itoa(int n)
 {
 	char	*nb;
 	size_t	size;
@@ -85,7 +89,7 @@ char			*ft_itoa(int n)
 	return (nb);
 }
 
-size_t			get_timestamp(void)
+size_t		get_timestamp(void)
 {
 	size_t			time;
 	struct timeval	tv;

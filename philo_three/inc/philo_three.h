@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 22:07:02 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/30 16:50:50 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/05/01 22:27:19 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef	struct	s_data
 
 t_data			g_data;
 
+size_t			ft_strlen(char *str);
 int				ft_isnumber(char *str);
 long int		ft_atoli(const char *str);
 size_t			get_timestamp(void);

@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 15:39:28 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/30 15:44:56 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/05/01 22:01:48 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	print_state(int x, int state)
 	size_t	time;
 
 	pthread_mutex_lock(&g_data.display);
-	if (end_simul() == 1)
+	if (ft_stop() == 1)
 		return (pthread_mutex_unlock(&g_data.display));
 	time = get_timestamp();
 	if (state == TAKE_A_FORK)

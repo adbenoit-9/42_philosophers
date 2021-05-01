@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:11:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/30 15:38:28 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/05/01 22:24:02 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef	struct	s_data
 
 t_data	g_data;
 
+size_t			ft_strlen(char *str);
 int				ft_isnumber(char *str);
 long int		ft_atoli(const char *str);
 size_t			get_timestamp(void);
@@ -72,6 +73,6 @@ void			ft_eat(t_philo *philo, int i);
 void			ft_take_forks(int i);
 void			ft_sleep(int i);
 int				print_in_thread(char *str);
-int				end_simul(void);
+int				ft_stop(void);
 
 #endif
