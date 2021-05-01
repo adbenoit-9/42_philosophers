@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_state.c                                    :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/27 16:10:35 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/28 13:27:42 by adbenoit         ###   ########.fr       */
+/*   Created: 2021/05/01 21:27:56 by adbenoit          #+#    #+#             */
+/*   Updated: 2021/05/01 21:28:24 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_two.h"
 
-size_t		print_state(int x, int state)
+size_t	print_state(int x, int state)
 {
 	size_t	time;
 
 	sem_wait(g_data.display);
 	if (end_simul() == 1)
-	{
-		sem_post(g_data.display);
-		return (0);
-	}
+		return (sem_post(g_data.display));
 	time = get_timestamp();
 	if (state == TAKE_A_FORK)
 		printf("%zums %d has taken a fork\n", time, x);

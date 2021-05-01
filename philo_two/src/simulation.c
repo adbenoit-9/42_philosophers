@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:00:30 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/30 16:44:59 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/05/01 21:29:07 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ int			simulation(void)
 	return (0);
 }
 
-
 int			end_simul(void)
 {
 	int ret;
@@ -88,6 +87,6 @@ int			end_simul(void)
 		ret = 0;
 	else
 		ret = 1;
-	sem_post(g_data.state);	
+	sem_post(g_data.state);
 	return (ret);
 }
