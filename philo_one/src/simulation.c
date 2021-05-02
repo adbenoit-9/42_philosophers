@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:00:30 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/05/01 22:01:48 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/05/02 12:12:58 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,16 @@ static void	ft_isalive(t_philo *philo)
 			return ;
 		pthread_mutex_lock(&philo->mutex);
 		time = get_timestamp() - philo->last_meal;
-		pthread_mutex_unlock(&philo->mutex);
 		if (time > (long int)g_data.time[DIE])
 		{
 			pthread_mutex_unlock(&g_data.fork[(philo->i + 1) %
 			g_data.nb_philo]);
 			pthread_mutex_unlock(&g_data.fork[philo->i]);
 			print_state(philo->i + 1, DIE);
+			pthread_mutex_unlock(&philo->mutex);
 			return ;
 		}
+		pthread_mutex_unlock(&philo->mutex);
 		usleep(10);
 	}
 }
