@@ -6,11 +6,44 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 15:39:28 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/05/05 13:52:57 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/05/05 16:33:24 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
+
+size_t	ft_strcat(char *dest, char *src)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	while (dest[j])
+		++j;
+	while (src[i])
+	{
+		dest[j] = src[i];
+		++i;
+		++j;
+	}
+	dest[j] = 0;
+	return (j);
+}
+
+void	ft_putmess(int x, size_t time, char *str)
+{
+	char	buffer[4096];
+	size_t		n;
+
+	buffer[0] = 0;
+	ft_strcat(buffer, ft_uitoa(time));
+	ft_strcat(buffer, "ms ");
+	ft_strcat(buffer, ft_uitoa(x));
+	ft_strcat(buffer, " ");
+	n = ft_strcat(buffer, str);
+	write(1, buffer, n);
+}
 
 size_t	print_state(int x, int state)
 {
@@ -33,7 +66,7 @@ size_t	print_state(int x, int state)
 		pthread_mutex_lock(&g_data.state);
 		g_data.simul_state = STOP;
 		pthread_mutex_unlock(&g_data.state);
-		printf("%zums %d die\n", time, x);
+		ft_putmess(x, time, "died\n");
 	}
 	pthread_mutex_unlock(&g_data.display);
 	return (time);

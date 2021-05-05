@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 22:07:02 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/05/01 22:27:19 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/05/05 16:00:59 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,5 @@ void			is_someone_dead(void);
 void			is_someone_hungry(void);
 void			ft_quit(int status, char *error);
 int				print_in_thread(char *str);
-char			*ft_itoa(int n);
+char			*ft_uitoa(size_t n);
 #endif

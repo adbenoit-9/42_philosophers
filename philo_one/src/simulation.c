@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:00:30 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/05/02 12:12:58 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/05/05 16:32:17 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int			simulation(void)
 		if (pthread_create(&g_data.philo[i].t, NULL, (void *)routine,
 		&g_data.philo[i]) != 0)
 			return (print_in_thread("Thread Error.\n"));
+		// usleep(5);
 		++i;
 	}
 	i = 0;

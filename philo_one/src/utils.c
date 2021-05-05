@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 18:04:05 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/05/01 22:30:19 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/05/05 16:31:10 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,32 @@ int			ft_isnumber(char *str)
 		++i;
 	}
 	return (1);
+}
+
+char		*ft_uitoa(size_t n)
+{
+	char	*nb;
+	size_t	size;
+	size_t	num;
+
+	size = 0;
+	num = n;
+	while (n >= 10)
+	{
+		++size;
+		n = n / 10;
+	}
+	++size;
+	if (!(nb = malloc(sizeof(char) * (size + 1))))
+		return (0);
+	nb[size] = 0;
+	while (size > 0)
+	{
+		nb[size - 1] = num % 10 + 48;
+		num = num / 10;
+		--size;
+	}
+	return (nb);
 }
 
 size_t		get_timestamp(void)
