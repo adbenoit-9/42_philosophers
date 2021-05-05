@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 15:39:28 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/05/05 20:01:30 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/05/05 21:21:08 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,15 @@ void		print_action(int x, int action)
 	{
 		sem_wait(g_data.state);
 		g_data.simul_state = STOP;
-		sem_post(&g_data.state);
+		sem_post(g_data.state);
 	}
-	sem_post(&g_data.display);
+	sem_post(g_data.display);
 }
 
 int			print_in_thread(char *str)
 {
 	sem_wait(g_data.display);
 	printf("%s", str);
-	sem_post(&g_data.display);
+	sem_post(g_data.display);
 	return (0);
 }
