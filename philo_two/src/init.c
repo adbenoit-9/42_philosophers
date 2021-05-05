@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:58:38 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/05/05 16:10:24 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/05/05 19:56:57 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static t_philo	*ft_philo_init(int n)
 		philo[i].nb_meal = 0;
 		philo[i].i = i;
 		philo[i].last_meal = 0;
-		name = ft_itoa(i);
+		name = ft_uitoa(i);
 		sem_unlink(name);
 		philo[i].sem = sem_open(name, O_CREAT, S_IRWXU, 1);
 		free(name);
@@ -74,7 +74,7 @@ int				ft_data_init(int ac, char **av)
 	g_data.simul_state = RUN;
 	g_data.nb_philo = ft_atoli(av[1]);
 	g_data.nb_meal_min = -1;
-	g_data.time[DIE] = ft_atoli(av[2]);
+	g_data.time[DIED] = ft_atoli(av[2]);
 	g_data.time[EAT] = ft_atoli(av[3]);
 	g_data.time[SLEEP] = ft_atoli(av[4]);
 	if (av[5])

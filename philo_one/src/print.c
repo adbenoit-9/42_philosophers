@@ -6,73 +6,57 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 15:39:28 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/05/05 16:33:24 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/05/05 19:55:25 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-size_t	ft_strcat(char *dest, char *src)
+static void	get_message(char *mess, int x, size_t time, char *str)
 {
-	size_t	i;
-	size_t	j;
+	char	*tmp;
 
-	i = 0;
-	j = 0;
-	while (dest[j])
-		++j;
-	while (src[i])
-	{
-		dest[j] = src[i];
-		++i;
-		++j;
-	}
-	dest[j] = 0;
-	return (j);
+	tmp = ft_uitoa(time);
+	ft_strcat(mess, tmp);
+	free(tmp);
+	ft_strcat(mess, "ms ");
+	tmp = ft_uitoa(x);
+	ft_strcat(mess, tmp);
+	free(tmp);
+	ft_strcat(mess, " ");
+	ft_strcat(mess, str);
 }
 
-void	ft_putmess(int x, size_t time, char *str)
-{
-	char	buffer[4096];
-	size_t		n;
-
-	buffer[0] = 0;
-	ft_strcat(buffer, ft_uitoa(time));
-	ft_strcat(buffer, "ms ");
-	ft_strcat(buffer, ft_uitoa(x));
-	ft_strcat(buffer, " ");
-	n = ft_strcat(buffer, str);
-	write(1, buffer, n);
-}
-
-size_t	print_state(int x, int state)
+void		print_action(int x, int action)
 {
 	size_t	time;
+	char	mess[1000];
 
-	pthread_mutex_lock(&g_data.display);
-	if (ft_stop() == 1)
-		return (pthread_mutex_unlock(&g_data.display));
+	mess[0] = 0;
 	time = get_timestamp();
-	if (state == TAKE_A_FORK)
-		printf("%zums %d has taken a fork\n", time, x);
-	else if (state == EAT)
-		printf("%zums %d is eating\n", time, x);
-	else if (state == SLEEP)
-		printf("%zums %d is sleeping\n", time, x);
-	else if (state == THINK)
-		printf("%zums %d is thinking\n", time, x);
-	else if (state == DIE)
+	if (action == TAKE_A_FORK)
+		get_message(mess, x, time, "has taken a fork\n");
+	else if (action == EAT)
+		get_message(mess, x, time, "is eating\n");
+	else if (action == SLEEP)
+		get_message(mess, x, time, "is sleeping\n");
+	else if (action == THINK)
+		get_message(mess, x, time, "is thinking\n");
+	else if (action == DIED)
+		get_message(mess, x, time, "died\n");
+	pthread_mutex_lock(&g_data.display);
+	if (ft_stop() == 0)
+		write(1, mess, ft_strlen(mess));
+	if (action == DIED)
 	{
 		pthread_mutex_lock(&g_data.state);
 		g_data.simul_state = STOP;
 		pthread_mutex_unlock(&g_data.state);
-		ft_putmess(x, time, "died\n");
 	}
 	pthread_mutex_unlock(&g_data.display);
-	return (time);
 }
 
-int		print_in_thread(char *str)
+int			print_in_thread(char *str)
 {
 	pthread_mutex_lock(&g_data.display);
 	printf("%s", str);

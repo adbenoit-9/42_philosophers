@@ -6,11 +6,21 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:00:30 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/30 16:56:24 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/05/05 20:11:38 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_three.h"
+
+size_t		get_timestamp(void)
+{
+	size_t			time;
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	time = tv.tv_sec * 1000 + tv.tv_usec / 1000 - g_start_time;
+	return (time);
+}
 
 static void	routine(t_philo *philo)
 {

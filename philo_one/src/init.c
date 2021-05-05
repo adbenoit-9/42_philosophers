@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:58:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/05/01 22:24:16 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/05/05 19:42:29 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,9 @@ int				ft_data_init(int ac, char **av)
 		return (-1);
 	g_data.simul_state = RUN;
 	g_data.nb_philo = ft_atoli(av[1]);
+	g_data.nb_run = 0;
 	g_data.nb_meal_min = -1;
-	g_data.time[DIE] = ft_atoli(av[2]);
+	g_data.time[DIED] = ft_atoli(av[2]);
 	g_data.time[EAT] = ft_atoli(av[3]);
 	g_data.time[SLEEP] = ft_atoli(av[4]);
 	if (av[5])

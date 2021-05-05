@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 22:07:02 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/05/05 16:00:59 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/05/05 19:54:10 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # include <sys/wait.h>
 # include <signal.h>
 
-# define DIE 0
+# define DIED 0
 # define EAT 1
 # define SLEEP 2
 # define THINK 3
@@ -68,12 +68,14 @@ t_data			g_data;
 
 size_t			ft_strlen(char *str);
 int				ft_isnumber(char *str);
+char			*ft_strcat(char *dest, const char *src);
 long int		ft_atoli(const char *str);
-size_t			get_timestamp(void);
+char			*ft_uitoa(size_t n);
 
+size_t			get_timestamp(void);
 int				ft_data_init(int ac, char **av);
 int				simulation(void);
-size_t			print_state(int x, int state);
+void			print_action(int x, int action);
 void			ft_eat(t_philo *philo, int i);
 void			ft_take_forks(int i);
 void			ft_sleep(int i);

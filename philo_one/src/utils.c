@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 18:04:05 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/05/05 16:31:10 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/05/05 19:49:45 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,27 @@ int			ft_isnumber(char *str)
 	return (1);
 }
 
+char		*ft_strcat(char *dest, const char *src)
+{
+	size_t	i;
+	size_t	j;
+
+	if (!src || !dest)
+		return (dest);
+	i = 0;
+	while (dest[i])
+		++i;
+	j = 0;
+	while (src[j])
+	{
+		dest[i] = src[j];
+		++i;
+		++j;
+	}
+	dest[i] = 0;
+	return (dest);
+}
+
 char		*ft_uitoa(size_t n)
 {
 	char	*nb;
@@ -87,14 +108,4 @@ char		*ft_uitoa(size_t n)
 		--size;
 	}
 	return (nb);
-}
-
-size_t		get_timestamp(void)
-{
-	size_t			time;
-	struct timeval	tv;
-
-	gettimeofday(&tv, NULL);
-	time = tv.tv_sec * 1000 + tv.tv_usec / 1000 - g_start_time;
-	return (time);
 }

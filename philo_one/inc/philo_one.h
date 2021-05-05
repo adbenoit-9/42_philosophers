@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:11:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/05/05 16:01:29 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/05/05 19:53:42 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <string.h>
 # include <errno.h>
 
-# define DIE 0
+# define DIED 0
 # define EAT 1
 # define SLEEP 2
 # define THINK 3
@@ -56,6 +56,7 @@ typedef	struct	s_data
 	int				nb_meal_min;
 	int				nb_fed;
 	int				nb_philo;
+	int				nb_run;
 	int				simul_state;
 }				t_data;
 
@@ -63,13 +64,14 @@ t_data	g_data;
 
 size_t			ft_strlen(char *str);
 int				ft_isnumber(char *str);
-char			*ft_uitoa(size_t n);
+char			*ft_strcat(char *dest, const char *src);
 long int		ft_atoli(const char *str);
-size_t			get_timestamp(void);
+char			*ft_uitoa(size_t n);
 
+size_t			get_timestamp(void);
 int				ft_data_init(int ac, char **av);
 int				simulation(void);
-size_t			print_state(int x, int state);
+void			print_action(int x, int action);
 void			ft_eat(t_philo *philo, int i);
 void			ft_take_forks(int i);
 void			ft_sleep(int i);

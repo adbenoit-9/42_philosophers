@@ -6,11 +6,21 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:00:30 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/05/02 12:13:42 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/05/05 19:50:18 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_two.h"
+
+size_t		get_timestamp(void)
+{
+	size_t			time;
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	time = tv.tv_sec * 1000 + tv.tv_usec / 1000 - g_start_time;
+	return (time);
+}
 
 static void	ft_isalive(t_philo *philo)
 {
@@ -22,11 +32,11 @@ static void	ft_isalive(t_philo *philo)
 			return ;
 		sem_wait(philo->sem);
 		time = get_timestamp() - philo->last_meal;
-		if (time > (long int)g_data.time[DIE])
+		if (time > (long int)g_data.time[DIED])
 		{
 			sem_post(g_data.fork);
 			sem_post(g_data.his_turn);
-			print_state(philo->i + 1, DIE);
+			print_action(philo->i + 1, DIED);
 			sem_post(philo->sem);
 			return ;
 		}

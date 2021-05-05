@@ -6,11 +6,21 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:00:30 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/05/05 16:32:17 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/05/05 19:47:41 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
+
+size_t		get_timestamp(void)
+{
+	size_t			time;
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	time = tv.tv_sec * 1000 + tv.tv_usec / 1000 - g_start_time;
+	return (time);
+}
 
 static void	ft_isalive(t_philo *philo)
 {
@@ -22,12 +32,12 @@ static void	ft_isalive(t_philo *philo)
 			return ;
 		pthread_mutex_lock(&philo->mutex);
 		time = get_timestamp() - philo->last_meal;
-		if (time > (long int)g_data.time[DIE])
+		if (time > (long int)g_data.time[DIED])
 		{
 			pthread_mutex_unlock(&g_data.fork[(philo->i + 1) %
 			g_data.nb_philo]);
 			pthread_mutex_unlock(&g_data.fork[philo->i]);
-			print_state(philo->i + 1, DIE);
+			print_action(philo->i + 1, DIED);
 			pthread_mutex_unlock(&philo->mutex);
 			return ;
 		}
@@ -40,8 +50,8 @@ static void	routine(t_philo *philo)
 {
 	pthread_t	t;
 
-	if (ft_stop() == 1)
-		return ;
+	while (g_data.nb_run <= g_data.nb_philo)
+		usleep(10);
 	if (pthread_create(&t, NULL, (void *)ft_isalive, philo) != 0)
 		return ((void)print_in_thread("Thread Error.\n"));
 	while (ft_stop() == 0)
@@ -58,18 +68,19 @@ int			simulation(void)
 	int				i;
 	struct timeval	tv;
 
-	if (gettimeofday(&tv, NULL) == -1)
-		return (print_in_thread("Get Time Error.\n"));
-	g_start_time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
 	i = 0;
 	while (i < g_data.nb_philo)
 	{
 		if (pthread_create(&g_data.philo[i].t, NULL, (void *)routine,
 		&g_data.philo[i]) != 0)
 			return (print_in_thread("Thread Error.\n"));
-		// usleep(5);
 		++i;
+		++g_data.nb_run;
 	}
+	if (gettimeofday(&tv, NULL) == -1)
+		return (print_in_thread("Get Time Error.\n"));
+	g_start_time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+	++g_data.nb_run;
 	i = 0;
 	while (i < g_data.nb_philo)
 	{
