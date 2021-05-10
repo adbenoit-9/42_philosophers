@@ -32,6 +32,7 @@ void		print_action(int x, int action)
 	size_t	time;
 	char	mess[1000];
 
+	pthread_mutex_lock(&g_data.display);
 	mess[0] = 0;
 	time = get_timestamp();
 	if (action == TAKE_A_FORK)
@@ -44,7 +45,6 @@ void		print_action(int x, int action)
 		get_message(mess, x, time, "is thinking\n");
 	else if (action == DIED)
 		get_message(mess, x, time, "died\n");
-	pthread_mutex_lock(&g_data.display);
 	if (ft_stop() == 0)
 		write(1, mess, ft_strlen(mess));
 	if (action == DIED)

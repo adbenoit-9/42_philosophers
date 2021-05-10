@@ -32,6 +32,7 @@ void		print_action(int x, int action)
 	size_t	time;
 	char	mess[1000];
 
+	sem_wait(g_data.display);
 	mess[0] = 0;
 	time = get_timestamp();
 	if (action == TAKE_A_FORK)
@@ -44,7 +45,6 @@ void		print_action(int x, int action)
 		get_message(mess, x, time, "is thinking\n");
 	else if (action == DIED)
 		get_message(mess, x, time, "died\n");
-	sem_wait(g_data.display);
 	write(1, mess, ft_strlen(mess));
 	if (action == DIED)
 		sem_post(g_data.is_dead);

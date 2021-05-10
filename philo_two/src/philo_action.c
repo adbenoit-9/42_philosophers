@@ -38,7 +38,7 @@ void		ft_eat(t_philo *philo, int i)
 	sem_wait(philo->sem);
 	start_eat = get_timestamp();
 	print_action(i + 1, EAT);
-	philo->last_meal = get_timestamp();
+	philo->last_meal = start_eat;
 	sem_post(philo->sem);
 	while (get_timestamp() - start_eat < g_data.time[EAT])
 		usleep(10);

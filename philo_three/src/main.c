@@ -26,6 +26,7 @@ int	main(int ac, char **av)
 		simulation();
 		return (0);
 	}
+	ft_sem_clean();
 	free(g_data.philo);
 	return (0);
 }

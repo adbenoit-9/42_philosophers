@@ -52,6 +52,7 @@ typedef	struct	s_data
 	pthread_mutex_t display;
 	pthread_mutex_t state;
 	pthread_mutex_t fed;
+	pthread_mutex_t create;
 	size_t			time[3];
 	int				nb_meal_min;
 	int				nb_fed;

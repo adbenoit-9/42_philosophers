@@ -26,7 +26,7 @@ static int	ft_kill_process(void)
 	return (0);
 }
 
-static void	ft_sem_clean(void)
+void		ft_sem_clean(void)
 {
 	int	i;
 
@@ -50,8 +50,12 @@ void		ft_quit(int status, char *error)
 		print_in_thread(error);
 	ft_kill_process();
 	if (status == END)
+	{
 		printf("All philosophers ate at least %d times\n", g_data.nb_meal_min);
+		sem_post(g_data.is_dead);
+		return ;
+	}
 	ft_sem_clean();
 	free(g_data.philo);
-	kill(0, SIGINT);
+	exit(0);
 }

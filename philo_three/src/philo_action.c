@@ -18,16 +18,16 @@ void		ft_take_forks(int i)
 	sem_wait(g_data.fork);
 	print_action(i + 1, TAKE_A_FORK);
 	sem_wait(g_data.fork);
-	sem_post(g_data.his_turn);
 	print_action(i + 1, TAKE_A_FORK);
+	sem_post(g_data.his_turn);
 }
 
 void		ft_eat(t_philo *philo, int i)
 {
 	size_t	start_eat;
 
-	start_eat = get_timestamp();
 	sem_wait(philo->sem);
+	start_eat = get_timestamp();
 	philo->last_meal = start_eat;
 	sem_post(philo->sem);
 	print_action(i + 1, EAT);

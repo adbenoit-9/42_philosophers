@@ -34,8 +34,8 @@ static void	ft_isalive(t_philo *philo)
 		time = get_timestamp() - philo->last_meal;
 		if (time > (long int)g_data.time[DIED])
 		{
-			sem_post(g_data.fork);
-			sem_post(g_data.his_turn);
+			if (g_data.nb_philo == 1)
+				sem_post(g_data.fork);
 			print_action(philo->i + 1, DIED);
 			sem_post(philo->sem);
 			return ;

@@ -27,6 +27,7 @@ static void	ft_mutex_clean(void)
 	pthread_mutex_destroy(&g_data.display);
 	pthread_mutex_destroy(&g_data.state);
 	pthread_mutex_destroy(&g_data.fed);
+	pthread_mutex_destroy(&g_data.create);
 }
 
 int			main(int ac, char **av)

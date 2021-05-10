@@ -12,6 +12,16 @@
 
 #include "philo_one.h"
 
+size_t			get_timestamp(void)
+{
+	size_t			time;
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	time = tv.tv_sec * 1000 + tv.tv_usec / 1000 - g_start_time;
+	return (time);
+}
+
 static t_philo	*ft_philo_init(int n)
 {
 	t_philo	*philo;
@@ -50,6 +60,7 @@ static int		ft_mutex_init(void)
 	pthread_mutex_init(&g_data.display, NULL);
 	pthread_mutex_init(&g_data.state, NULL);
 	pthread_mutex_init(&g_data.fed, NULL);
+	pthread_mutex_init(&g_data.create, NULL);
 	return (0);
 }
 

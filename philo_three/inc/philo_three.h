@@ -84,5 +84,6 @@ void			is_someone_dead(void);
 void			is_someone_hungry(void);
 void			ft_quit(int status, char *error);
 int				print_in_thread(char *str);
-char			*ft_uitoa(size_t n);
+void			ft_sem_clean(void);
+
 #endif
