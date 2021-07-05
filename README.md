@@ -10,5 +10,5 @@ This project introduce to the basics of threading a process.
 ```
 cd philo_x/
 make
-./philo_x *number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]*
+./philo_x number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]
 ```
