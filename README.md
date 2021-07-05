@@ -8,7 +8,8 @@ This project introduce to the basics of threading a process.
 
 ## Usage
 ```
-cd philo_x/
-make
-./philo_x number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]
+$ git clone https://github.com/adbenoit-9/42_philosophers.git
+$ cd philo_x/
+$ make
+$ ./philo_x number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]
 ```
