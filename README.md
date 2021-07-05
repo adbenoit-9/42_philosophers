@@ -5,6 +5,7 @@
 This project introduce to the basics of threading a process.
 - learn how to make threads
 - discover the mutex
+- discover the semaphore
 
 ## Usage
 ```
