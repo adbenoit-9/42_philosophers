@@ -6,11 +6,14 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:00:30 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/05/05 20:19:38 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/13 18:01:59 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
+
+/* Returns 1 if all philosophers threads has been created.
+Otherwise returns 0. */
 
 static int	ft_isallcreate(void)
 {
@@ -23,6 +26,8 @@ static int	ft_isallcreate(void)
 	pthread_mutex_unlock(&g_data.create);
 	return (ret);
 }
+
+/* Check simultaneously if the philosopher is alive  */
 
 static void	ft_isalive(t_philo *philo)
 {
@@ -63,6 +68,8 @@ static void	routine(t_philo *philo)
 	}
 	pthread_join(t, NULL);
 }
+
+/* Handle the simulation: creates one thread for each philo */
 
 int			simulation(void)
 {

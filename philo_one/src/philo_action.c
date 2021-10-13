@@ -6,11 +6,14 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 17:23:38 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/05/05 19:47:41 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/13 16:27:02 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
+
+/* Returns 0 if the philosopher has eaten at least the number of times needed.
+Otherwise returns 1 (is hungry). */
 
 static int	philo_hungry(t_philo *philo)
 {
@@ -20,6 +23,8 @@ static int	philo_hungry(t_philo *philo)
 		return (0);
 	return (1);
 }
+
+/* the philosophers alternately take the left or right fork first. */
 
 void		ft_take_forks(int i)
 {
