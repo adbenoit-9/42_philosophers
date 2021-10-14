@@ -6,11 +6,13 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 14:54:43 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/05/05 19:47:41 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/13 21:37:01 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_three.h"
+
+/* Check simultaneously if the philosopher is alive  */
 
 void	ft_isalive(t_philo *philo)
 {
@@ -32,6 +34,8 @@ void	is_someone_dead(void)
 	sem_wait(g_data.is_dead);
 	ft_quit(STOP, NULL);
 }
+
+/* Check if all philosophers have eaten at least the number of times needed. */
 
 void	is_someone_hungry(void)
 {

@@ -6,11 +6,14 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 17:24:31 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/05/05 19:47:41 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/13 22:23:19 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_two.h"
+
+/* Returns 0 if the philosopher has eaten at least the number of times needed.
+Otherwise returns 1 (is hungry). */
 
 static int	philo_hungry(t_philo *philo)
 {

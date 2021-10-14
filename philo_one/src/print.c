@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 15:39:28 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/05/05 19:55:25 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/13 22:30:42 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	get_message(char *mess, int x, size_t time, char *str)
 	ft_strcat(mess, str);
 }
 
-void		print_action(int x, int action)
+void	print_action(int x, int action)
 {
 	size_t	time;
 	char	mess[1000];
@@ -56,7 +56,7 @@ void		print_action(int x, int action)
 	pthread_mutex_unlock(&g_data.display);
 }
 
-int			print_in_thread(char *str)
+int	print_in_thread(char *str)
 {
 	pthread_mutex_lock(&g_data.display);
 	printf("%s", str);

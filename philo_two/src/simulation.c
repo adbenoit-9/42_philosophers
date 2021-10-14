@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:00:30 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/05/05 19:50:18 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/13 22:24:06 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ size_t		get_timestamp(void)
 	time = tv.tv_sec * 1000 + tv.tv_usec / 1000 - g_start_time;
 	return (time);
 }
+
+/* Check simultaneously if the philosopher is alive  */
 
 static void	ft_isalive(t_philo *philo)
 {
@@ -63,6 +65,8 @@ static void	routine(t_philo *philo)
 	}
 	pthread_join(t, NULL);
 }
+
+/* Handle the simulation: creates one thread for each philo */
 
 int			simulation(void)
 {

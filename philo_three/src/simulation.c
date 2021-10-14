@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:00:30 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/05/05 20:11:38 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/13 22:20:52 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static void	routine(t_philo *philo)
 	}
 }
 
+/* Creates one processus for each philo */
+
 static int	ft_philo_launch(int *pid)
 {
 	int	i;
@@ -61,6 +63,8 @@ static int	ft_philo_launch(int *pid)
 		routine(&g_data.philo[i - 1]);
 	return (0);
 }
+
+/* wait for all processes to finish */
 
 static void	ft_philo_wait(int pid)
 {
@@ -82,6 +86,8 @@ static void	ft_philo_wait(int pid)
 	}
 	return ;
 }
+
+/* Handle the simualtion */
 
 int			simulation(void)
 {

@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:11:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/05/05 19:53:42 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/13 22:30:02 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 
 size_t	g_start_time;
 
-typedef struct	s_philo
+typedef struct s_philo
 {
 	pthread_t		t;
 	pthread_mutex_t	mutex;
@@ -45,14 +45,14 @@ typedef struct	s_philo
 	int				nb_meal;
 }				t_philo;
 
-typedef	struct	s_data
+typedef struct s_data
 {
 	t_philo			*philo;
 	pthread_mutex_t	*fork;
-	pthread_mutex_t display;
-	pthread_mutex_t state;
-	pthread_mutex_t fed;
-	pthread_mutex_t create;
+	pthread_mutex_t	display;
+	pthread_mutex_t	state;
+	pthread_mutex_t	fed;
+	pthread_mutex_t	create;
 	size_t			time[3];
 	int				nb_meal_min;
 	int				nb_fed;

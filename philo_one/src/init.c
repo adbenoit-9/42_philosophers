@@ -6,13 +6,13 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:58:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/05/05 19:42:29 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/13 22:33:16 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-size_t			get_timestamp(void)
+size_t	get_timestamp(void)
 {
 	size_t			time;
 	struct timeval	tv;
@@ -43,7 +43,7 @@ static t_philo	*ft_philo_init(int n)
 	return (philo);
 }
 
-static int		ft_mutex_init(void)
+static int	ft_mutex_init(void)
 {
 	int	i;
 
@@ -64,9 +64,9 @@ static int		ft_mutex_init(void)
 	return (0);
 }
 
-int				ft_data_init(int ac, char **av)
+int	ft_data_init(int ac, char **av)
 {
-	int i;
+	int	i;
 
 	g_data.fork = NULL;
 	g_data.philo = NULL;
@@ -75,8 +75,9 @@ int				ft_data_init(int ac, char **av)
 	i = 1;
 	while (av[i] && ft_isnumber(av[i]) == 1)
 		++i;
-	if (i != ac || ft_strlen(av[1]) > 18 || ft_strlen(av[2]) > 18 ||
-	ft_strlen(av[3]) > 18 || ft_strlen(av[4]) > 18 || ft_strlen(av[5]) > 18)
+	if (i != ac || ft_strlen(av[1]) > 18 || ft_strlen(av[2]) > 18
+		|| ft_strlen(av[3]) > 18 || ft_strlen(av[4]) > 18
+		|| ft_strlen(av[5]) > 18)
 		return (-1);
 	g_data.simul_state = RUN;
 	g_data.nb_philo = ft_atoli(av[1]);
