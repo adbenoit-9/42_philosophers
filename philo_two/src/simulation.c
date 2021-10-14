@@ -6,13 +6,13 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:00:30 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/10/13 22:24:06 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/14 12:32:27 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_two.h"
 
-size_t		get_timestamp(void)
+size_t	get_timestamp(void)
 {
 	size_t			time;
 	struct timeval	tv;
@@ -68,7 +68,7 @@ static void	routine(t_philo *philo)
 
 /* Handle the simulation: creates one thread for each philo */
 
-int			simulation(void)
+int	simulation(void)
 {
 	int				i;
 	struct timeval	tv;
@@ -80,7 +80,7 @@ int			simulation(void)
 	while (i < g_data.nb_philo)
 	{
 		if (pthread_create(&g_data.philo[i].t, NULL, (void *)routine,
-		&g_data.philo[i]) != 0)
+				&g_data.philo[i]) != 0)
 			return (print_in_thread("Thread Error.\n"));
 		++i;
 	}
@@ -93,9 +93,9 @@ int			simulation(void)
 	return (0);
 }
 
-int			ft_stop(void)
+int	ft_stop(void)
 {
-	int ret;
+	int	ret;
 
 	sem_wait(g_data.state);
 	if (g_data.simul_state == RUN)

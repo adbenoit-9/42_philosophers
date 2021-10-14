@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 14:54:43 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/10/13 21:37:01 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/14 12:27:59 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 void	ft_isalive(t_philo *philo)
 {
-	long int time;
+	long int	time;
 
 	while (1)
 	{

@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:58:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/10/13 22:33:16 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/14 12:14:17 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,13 @@ static int	ft_mutex_init(void)
 	return (0);
 }
 
+void	ft_time_init(char **av)
+{
+	g_data.time[DIED] = ft_atoli(av[2]);
+	g_data.time[EAT] = ft_atoli(av[3]);
+	g_data.time[SLEEP] = ft_atoli(av[4]);
+}
+
 int	ft_data_init(int ac, char **av)
 {
 	int	i;
@@ -81,11 +88,9 @@ int	ft_data_init(int ac, char **av)
 		return (-1);
 	g_data.simul_state = RUN;
 	g_data.nb_philo = ft_atoli(av[1]);
+	ft_time_init(av);
 	g_data.nb_run = 0;
 	g_data.nb_meal_min = -1;
-	g_data.time[DIED] = ft_atoli(av[2]);
-	g_data.time[EAT] = ft_atoli(av[3]);
-	g_data.time[SLEEP] = ft_atoli(av[4]);
 	if (av[5])
 		g_data.nb_meal_min = ft_atoli(av[5]);
 	g_data.philo = ft_philo_init(g_data.nb_philo);

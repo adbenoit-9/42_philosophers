@@ -6,13 +6,13 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 18:04:05 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/05/05 19:52:06 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/14 12:22:29 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_three.h"
 
-size_t		ft_strlen(char *str)
+size_t	ft_strlen(char *str)
 {
 	size_t	len;
 
@@ -34,7 +34,7 @@ long int	ft_atoli(const char *str)
 	neg = 1;
 	num = 0;
 	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'
-	|| str[i] == '\v' || str[i] == '\f' || str[i] == '\r')
+		|| str[i] == '\v' || str[i] == '\f' || str[i] == '\r')
 		++i;
 	if (str[i] == '-')
 		neg = -1;
@@ -49,9 +49,9 @@ long int	ft_atoli(const char *str)
 	return (num);
 }
 
-int			ft_isnumber(char *str)
+int	ft_isnumber(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -63,7 +63,7 @@ int			ft_isnumber(char *str)
 	return (1);
 }
 
-char		*ft_uitoa(size_t n)
+char	*ft_uitoa(size_t n)
 {
 	char	*nb;
 	size_t	size;
@@ -77,7 +77,8 @@ char		*ft_uitoa(size_t n)
 		n = n / 10;
 	}
 	++size;
-	if (!(nb = malloc(sizeof(char) * (size + 1))))
+	nb = malloc(sizeof(char) * (size + 1));
+	if (!nb)
 		return (0);
 	nb[size] = 0;
 	while (size > 0)
@@ -89,7 +90,7 @@ char		*ft_uitoa(size_t n)
 	return (nb);
 }
 
-char		*ft_strcat(char *dest, const char *src)
+char	*ft_strcat(char *dest, const char *src)
 {
 	size_t	i;
 	size_t	j;

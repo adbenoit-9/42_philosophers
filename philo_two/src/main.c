@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:11:16 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/30 15:49:59 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/14 12:32:47 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ static void	ft_sem_clean(void)
 	}
 }
 
-int			main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	int ret;
+	int	ret;
 
 	ret = ft_data_init(ac, av);
 	if (ret == -1)

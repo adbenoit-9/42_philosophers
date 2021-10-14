@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 17:00:15 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/05/01 22:07:15 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/14 12:29:09 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	ft_kill_process(void)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < g_data.nb_philo)
@@ -26,7 +26,7 @@ static int	ft_kill_process(void)
 	return (0);
 }
 
-void		ft_sem_clean(void)
+void	ft_sem_clean(void)
 {
 	int	i;
 
@@ -44,7 +44,7 @@ void		ft_sem_clean(void)
 	}
 }
 
-void		ft_quit(int status, char *error)
+void	ft_quit(int status, char *error)
 {
 	if (error)
 		print_in_thread(error);

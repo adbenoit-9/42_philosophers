@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 22:07:02 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/05/05 19:54:10 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/14 12:20:18 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,7 @@
 # define END 1
 # define STOP 2
 
-size_t	g_start_time;
-
-typedef struct	s_philo
+typedef struct s_philo
 {
 	pid_t	pid;
 	sem_t	*sem;
@@ -48,7 +46,7 @@ typedef struct	s_philo
 	int		nb_meal;
 }				t_philo;
 
-typedef	struct	s_data
+typedef struct s_data
 {
 	size_t		time[3];
 	sem_t		*fork;
@@ -64,7 +62,8 @@ typedef	struct	s_data
 	t_philo		*philo;
 }				t_data;
 
-t_data			g_data;
+size_t	g_start_time;
+t_data	g_data;
 
 size_t			ft_strlen(char *str);
 int				ft_isnumber(char *str);

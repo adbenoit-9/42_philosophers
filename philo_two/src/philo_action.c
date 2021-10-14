@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 17:24:31 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/10/13 22:23:19 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/14 12:33:21 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	philo_hungry(t_philo *philo)
 	return (1);
 }
 
-void		ft_take_forks(int i)
+void	ft_take_forks(int i)
 {
 	sem_wait(g_data.his_turn);
 	sem_wait(g_data.fork);
@@ -34,7 +34,7 @@ void		ft_take_forks(int i)
 	sem_post(g_data.his_turn);
 }
 
-void		ft_eat(t_philo *philo, int i)
+void	ft_eat(t_philo *philo, int i)
 {
 	size_t	start_eat;
 
@@ -63,7 +63,7 @@ void		ft_eat(t_philo *philo, int i)
 	sem_post(g_data.fed);
 }
 
-void		ft_sleep(int i)
+void	ft_sleep(int i)
 {
 	size_t	time;
 

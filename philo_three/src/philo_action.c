@@ -6,13 +6,13 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 17:25:21 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/05/05 19:47:41 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/14 12:23:36 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_three.h"
 
-void		ft_take_forks(int i)
+void	ft_take_forks(int i)
 {
 	sem_wait(g_data.his_turn);
 	sem_wait(g_data.fork);
@@ -22,7 +22,7 @@ void		ft_take_forks(int i)
 	sem_post(g_data.his_turn);
 }
 
-void		ft_eat(t_philo *philo, int i)
+void	ft_eat(t_philo *philo, int i)
 {
 	size_t	start_eat;
 
@@ -40,7 +40,7 @@ void		ft_eat(t_philo *philo, int i)
 	sem_post(g_data.fork);
 }
 
-void		ft_sleep(int i)
+void	ft_sleep(int i)
 {
 	size_t	time;
 

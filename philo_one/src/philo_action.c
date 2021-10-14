@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 17:23:38 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/10/13 16:27:02 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/14 12:17:45 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ static int	philo_hungry(t_philo *philo)
 
 /* the philosophers alternately take the left or right fork first. */
 
-void		ft_take_forks(int i)
+void	ft_take_forks(int i)
 {
-	int first;
-	int second;
+	int	first;
+	int	second;
 
 	first = i;
 	second = (i + 1) % g_data.nb_philo;
@@ -44,7 +44,7 @@ void		ft_take_forks(int i)
 	print_action(i + 1, TAKE_A_FORK);
 }
 
-void		ft_eat(t_philo *philo, int i)
+void	ft_eat(t_philo *philo, int i)
 {
 	size_t	start_eat;
 
@@ -73,7 +73,7 @@ void		ft_eat(t_philo *philo, int i)
 	pthread_mutex_unlock(&g_data.fed);
 }
 
-void		ft_sleep(int i)
+void	ft_sleep(int i)
 {
 	size_t	time;
 

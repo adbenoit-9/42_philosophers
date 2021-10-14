@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:11:16 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/04/28 13:48:07 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/14 12:21:13 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int ac, char **av)
 {
-	int ret;
+	int	ret;
 
 	ret = ft_data_init(ac, av);
 	if (ret == -1)

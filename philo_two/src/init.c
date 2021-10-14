@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:58:38 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/05/05 19:56:57 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/14 12:38:15 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static t_philo	*ft_philo_init(int n)
 	return (philo);
 }
 
-static int		ft_sem_init(void)
+static int	ft_sem_init(void)
 {
 	sem_unlink("fork");
 	sem_unlink("display");
@@ -53,14 +53,21 @@ static int		ft_sem_init(void)
 	g_data.state = sem_open("state", O_CREAT, S_IRWXU, 1);
 	g_data.fed = sem_open("fed", O_CREAT, S_IRWXU, 1);
 	if (!g_data.fork || !g_data.display || !g_data.his_turn
-	|| !g_data.state || !g_data.fed)
+		|| !g_data.state || !g_data.fed)
 		return (-2);
 	return (0);
 }
 
-int				ft_data_init(int ac, char **av)
+void	ft_time_init(char **av)
 {
-	int i;
+	g_data.time[DIED] = ft_atoli(av[2]);
+	g_data.time[EAT] = ft_atoli(av[3]);
+	g_data.time[SLEEP] = ft_atoli(av[4]);
+}
+
+int	ft_data_init(int ac, char **av)
+{
+	int	i;
 
 	g_data.philo = NULL;
 	if (ac != 6 && ac != 5)
@@ -68,15 +75,14 @@ int				ft_data_init(int ac, char **av)
 	i = 1;
 	while (av[i] && ft_isnumber(av[i]) == 1)
 		++i;
-	if (i != ac || ft_strlen(av[1]) > 18 || ft_strlen(av[2]) > 18 ||
-	ft_strlen(av[3]) > 18 || ft_strlen(av[4]) > 18 || ft_strlen(av[5]) > 18)
+	if (i != ac || ft_strlen(av[1]) > 18 || ft_strlen(av[2]) > 18
+		|| ft_strlen(av[3]) > 18 || ft_strlen(av[4]) > 18
+		|| ft_strlen(av[5]) > 18)
 		return (-1);
 	g_data.simul_state = RUN;
 	g_data.nb_philo = ft_atoli(av[1]);
+	fttime_init(av);
 	g_data.nb_meal_min = -1;
-	g_data.time[DIED] = ft_atoli(av[2]);
-	g_data.time[EAT] = ft_atoli(av[3]);
-	g_data.time[SLEEP] = ft_atoli(av[4]);
 	if (av[5])
 		g_data.nb_meal_min = ft_atoli(av[5]);
 	g_data.philo = ft_philo_init(g_data.nb_philo);
