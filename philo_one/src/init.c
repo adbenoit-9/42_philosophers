@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:58:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/10/14 12:14:17 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/15 17:27:28 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,14 @@ static t_philo	*ft_philo_init(int n)
 	philo = (t_philo *)malloc(sizeof(t_philo) * n);
 	if (!philo)
 		return (NULL);
-	i = 0;
-	while (i < n)
+	i = -1;
+	while (++i < n)
 	{
-		philo[i].nb_meal = 0;
 		philo[i].i = i;
+		philo[i].nb_meal = 0;
 		philo[i].last_meal = 0;
-		++i;
+		philo[i].ifork[i % 2] = i;
+		philo[i].ifork[1 - i % 2] = (i + 1) % g_data.nb_philo;
 	}
 	return (philo);
 }
@@ -61,6 +62,7 @@ static int	ft_mutex_init(void)
 	pthread_mutex_init(&g_data.state, NULL);
 	pthread_mutex_init(&g_data.fed, NULL);
 	pthread_mutex_init(&g_data.create, NULL);
+	pthread_mutex_init(&g_data.start, NULL);
 	return (0);
 }
 
@@ -86,7 +88,7 @@ int	ft_data_init(int ac, char **av)
 		|| ft_strlen(av[3]) > 18 || ft_strlen(av[4]) > 18
 		|| ft_strlen(av[5]) > 18)
 		return (-1);
-	g_data.simul_state = RUN;
+	g_data.status = RUN;
 	g_data.nb_philo = ft_atoli(av[1]);
 	ft_time_init(av);
 	g_data.nb_run = 0;

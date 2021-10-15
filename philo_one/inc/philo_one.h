@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:11:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/10/13 22:30:02 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/15 17:37:26 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_philo
 	int				i;
 	size_t			last_meal;
 	int				nb_meal;
+	int				ifork[2];
 }				t_philo;
 
 typedef struct s_data
@@ -53,30 +54,30 @@ typedef struct s_data
 	pthread_mutex_t	state;
 	pthread_mutex_t	fed;
 	pthread_mutex_t	create;
+	pthread_mutex_t	start;
 	size_t			time[3];
 	int				nb_meal_min;
 	int				nb_fed;
 	int				nb_philo;
 	int				nb_run;
-	int				simul_state;
+	int				status;
 }				t_data;
 
 t_data	g_data;
 
 size_t			ft_strlen(char *str);
 int				ft_isnumber(char *str);
-char			*ft_strcat(char *dest, const char *src);
 long int		ft_atoli(const char *str);
-char			*ft_uitoa(size_t n);
 
 size_t			get_timestamp(void);
 int				ft_data_init(int ac, char **av);
 int				simulation(void);
 void			print_action(int x, int action);
 void			ft_eat(t_philo *philo, int i);
-void			ft_take_forks(int i);
+void			ft_take_forks(const t_philo philo, int i);
 void			ft_sleep(int i);
 int				print_in_thread(char *str);
-int				ft_stop(void);
+void			set_status(int status);
+int				get_status(void);
 
 #endif

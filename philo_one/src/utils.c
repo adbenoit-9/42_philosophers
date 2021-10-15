@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 18:04:05 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/10/14 12:16:53 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/15 17:37:15 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,52 +61,4 @@ int	ft_isnumber(char *str)
 		++i;
 	}
 	return (1);
-}
-
-char	*ft_strcat(char *dest, const char *src)
-{
-	size_t	i;
-	size_t	j;
-
-	if (!src || !dest)
-		return (dest);
-	i = 0;
-	while (dest[i])
-		++i;
-	j = 0;
-	while (src[j])
-	{
-		dest[i] = src[j];
-		++i;
-		++j;
-	}
-	dest[i] = 0;
-	return (dest);
-}
-
-char	*ft_uitoa(size_t n)
-{
-	char	*nb;
-	size_t	size;
-	size_t	num;
-
-	size = 0;
-	num = n;
-	while (n >= 10)
-	{
-		++size;
-		n = n / 10;
-	}
-	++size;
-	nb = malloc(sizeof(char) * (size + 1));
-	if (!nb)
-		return (0);
-	nb[size] = 0;
-	while (size > 0)
-	{
-		nb[size - 1] = num % 10 + 48;
-		num = num / 10;
-		--size;
-	}
-	return (nb);
 }
