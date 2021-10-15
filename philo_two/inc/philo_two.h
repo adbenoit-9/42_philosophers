@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:11:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/10/14 12:30:22 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/15 18:37:28 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_data
 	int			nb_meal_min;
 	int			nb_fed;
 	int			nb_philo;
-	int			simul_state;
+	int			status;
 	t_philo		*philo;
 }				t_data;
 
@@ -63,7 +63,6 @@ t_data	g_data;
 
 size_t			ft_strlen(char *str);
 int				ft_isnumber(char *str);
-char			*ft_strcat(char *dest, const char *src);
 long int		ft_atoli(const char *str);
 char			*ft_uitoa(size_t n);
 
@@ -75,7 +74,7 @@ void			ft_eat(t_philo *philo, int i);
 void			ft_take_forks(int i);
 void			ft_sleep(int i);
 int				print_in_thread(char *str);
-int				ft_stop(void);
-char			*ft_uitoa(size_t n);
+int				get_status(void);
+void			set_status(int status);
 
 #endif

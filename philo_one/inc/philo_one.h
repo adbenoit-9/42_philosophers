@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:11:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/10/15 17:37:26 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/15 18:15:34 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,11 @@ typedef struct s_data
 	pthread_mutex_t	display;
 	pthread_mutex_t	state;
 	pthread_mutex_t	fed;
-	pthread_mutex_t	create;
 	pthread_mutex_t	start;
 	size_t			time[3];
 	int				nb_meal_min;
 	int				nb_fed;
 	int				nb_philo;
-	int				nb_run;
 	int				status;
 }				t_data;
 

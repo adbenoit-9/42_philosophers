@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 22:07:02 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/10/14 12:20:18 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/15 18:21:39 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct s_data
 	int			nb_meal_min;
 	int			nb_fed;
 	int			nb_philo;
-	int			simul_state;
+	int			status;
 	t_philo		*philo;
 }				t_data;
 

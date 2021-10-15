@@ -6,46 +6,21 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 15:39:28 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/10/14 12:28:48 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/15 18:35:53 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_three.h"
 
-static void	get_message(char *mess, int x, size_t time, char *str)
-{
-	char	*tmp;
-
-	tmp = ft_uitoa(time);
-	ft_strcat(mess, tmp);
-	free(tmp);
-	ft_strcat(mess, "ms ");
-	tmp = ft_uitoa(x);
-	ft_strcat(mess, tmp);
-	free(tmp);
-	ft_strcat(mess, " ");
-	ft_strcat(mess, str);
-}
-
 void	print_action(int x, int action)
 {
-	size_t	time;
-	char	mess[1000];
+	size_t		time;
+	static char	*mess[5] = {"died", "is eating", "is sleeping", "is thinking",
+			"has taken a fork"};
 
 	sem_wait(g_data.display);
-	mess[0] = 0;
 	time = get_timestamp();
-	if (action == TAKE_A_FORK)
-		get_message(mess, x, time, "has taken a fork\n");
-	else if (action == EAT)
-		get_message(mess, x, time, "is eating\n");
-	else if (action == SLEEP)
-		get_message(mess, x, time, "is sleeping\n");
-	else if (action == THINK)
-		get_message(mess, x, time, "is thinking\n");
-	else if (action == DIED)
-		get_message(mess, x, time, "died\n");
-	write(1, mess, ft_strlen(mess));
+	printf("%zums %d %s\n", time, x, mess[action]);
 	if (action == DIED)
 		sem_post(g_data.is_dead);
 	else

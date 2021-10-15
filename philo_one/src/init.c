@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:58:58 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/10/15 17:27:28 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/15 18:15:15 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ static int	ft_mutex_init(void)
 	pthread_mutex_init(&g_data.display, NULL);
 	pthread_mutex_init(&g_data.state, NULL);
 	pthread_mutex_init(&g_data.fed, NULL);
-	pthread_mutex_init(&g_data.create, NULL);
 	pthread_mutex_init(&g_data.start, NULL);
 	return (0);
 }
@@ -91,7 +90,6 @@ int	ft_data_init(int ac, char **av)
 	g_data.status = RUN;
 	g_data.nb_philo = ft_atoli(av[1]);
 	ft_time_init(av);
-	g_data.nb_run = 0;
 	g_data.nb_meal_min = -1;
 	if (av[5])
 		g_data.nb_meal_min = ft_atoli(av[5]);

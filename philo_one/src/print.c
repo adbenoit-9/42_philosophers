@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 15:39:28 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/10/15 17:35:56 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/15 18:13:52 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_action(int x, int action)
 {
-	size_t	time;
+	size_t		time;
 	static char	*mess[5] = {"died", "is eating", "is sleeping", "is thinking",
 			"has taken a fork"};
 

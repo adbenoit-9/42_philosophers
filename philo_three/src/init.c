@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:58:49 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/10/14 12:27:35 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/15 18:21:39 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	ft_data_init(int ac, char **av)
 		|| ft_strlen(av[3]) > 18 || ft_strlen(av[4]) > 18
 		|| ft_strlen(av[5]) > 18)
 		return (-1);
-	g_data.simul_state = RUN;
+	g_data.status = RUN;
 	g_data.nb_philo = ft_atoli(av[1]);
 	ft_time_init(av);
 	g_data.nb_meal_min = -1;

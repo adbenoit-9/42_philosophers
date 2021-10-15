@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 14:54:43 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/10/14 12:27:59 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/15 18:21:39 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	is_someone_hungry(void)
 		++g_data.nb_fed;
 		if (g_data.nb_fed == g_data.nb_philo)
 		{
-			g_data.simul_state = STOP;
+			g_data.status = STOP;
 			ft_quit(END, NULL);
 			return ;
 		}

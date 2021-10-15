@@ -6,11 +6,13 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 17:25:21 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/10/14 12:23:36 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/15 18:36:39 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_three.h"
+
+/* The philosophers take their forks in turn. */
 
 void	ft_take_forks(int i)
 {
@@ -34,7 +36,7 @@ void	ft_eat(t_philo *philo, int i)
 	while (get_timestamp() - start_eat < g_data.time[EAT])
 		usleep(10);
 	++(philo->nb_meal);
-	if (g_data.simul_state == RUN && philo->nb_meal == g_data.nb_meal_min)
+	if (g_data.status == RUN && philo->nb_meal == g_data.nb_meal_min)
 		sem_post(g_data.is_fed);
 	sem_post(g_data.fork);
 	sem_post(g_data.fork);

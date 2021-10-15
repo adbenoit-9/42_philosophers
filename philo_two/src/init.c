@@ -6,11 +6,21 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:58:38 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/10/14 12:41:43 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/15 18:24:54 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_two.h"
+
+size_t	get_timestamp(void)
+{
+	size_t			time;
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	time = tv.tv_sec * 1000 + tv.tv_usec / 1000 - g_start_time;
+	return (time);
+}
 
 static t_philo	*ft_philo_init(int n)
 {
@@ -79,7 +89,7 @@ int	ft_data_init(int ac, char **av)
 		|| ft_strlen(av[3]) > 18 || ft_strlen(av[4]) > 18
 		|| ft_strlen(av[5]) > 18)
 		return (-1);
-	g_data.simul_state = RUN;
+	g_data.status = RUN;
 	g_data.nb_philo = ft_atoli(av[1]);
 	ft_time_init(av);
 	g_data.nb_meal_min = -1;

@@ -6,7 +6,7 @@
 /*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 18:04:05 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/10/14 12:31:35 by adbenoit         ###   ########.fr       */
+/*   Updated: 2021/10/15 18:33:11 by adbenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,25 +88,4 @@ char	*ft_uitoa(size_t n)
 		--size;
 	}
 	return (nb);
-}
-
-char	*ft_strcat(char *dest, const char *src)
-{
-	size_t	i;
-	size_t	j;
-
-	if (!src || !dest)
-		return (dest);
-	i = 0;
-	while (dest[i])
-		++i;
-	j = 0;
-	while (src[j])
-	{
-		dest[i] = src[j];
-		++i;
-		++j;
-	}
-	dest[i] = 0;
-	return (dest);
 }
